@@ -1,0 +1,148 @@
+---
+title: "Clusterização de categorias via Processo Dirichlet"
+output: html_notebook
+---
+
+# Modelo proposto
+
+<!-- Assumimos que $$Y_{ji} = X_{ji}^t\beta + \alpha_{ji} + \epsilon_{ji}, \ \ j=1,\ldots,J\ \  \mbox{e}\ \ i=1,\ldots, n_j,$$ em que $\epsilon_{ji}\sim N(0,\sigma^2_y)$. -->
+
+<!-- Note que -->
+
+<!-- -   $J$ representa o número de categorias; -->
+<!-- -   $n_j$ é o número de observações do nível $j$ da variável categorica; -->
+<!-- -   $\alpha_j$ é o efeito do nível $j$ da categoria. -->
+
+<!-- Queremos agrupar os $J$ efeitos $\alpha_1,\ldots,\alpha_J$ em no máximo $K$ categorias de tal forma que podemos escrever $$\alpha_j = \sum\limits_{k=1}^{K}\delta_k I\{S_j=k\}=\prod\limits_{k=1}^{K}\delta_k^{I\{S_j=k\}},$$ em que $I\{A\}$ é a função indicadora do evento $A$, $S_j$ é variável indicadora de qual cluster o nível $j$ da variável categorica pertence e $P(S_j = k) = w_k = \prod\limits_{k=1}^{K}\omega_k^{I\{S_j=k\}}$. -->
+
+<!-- ## Distribuições a priori -->
+
+<!-- Assumimos que -->
+
+<!-- -   $\beta_l \sim N(m_{\beta}, s^2_{\beta}), \ \ l=1,\ldots,p$; -->
+
+<!-- -   $\sigma^2_y\sim IG(a_{\sigma}, b_{\sigma})$ \ \   -->
+<!-- *(Gamma inversa)*. -->
+
+<!-- ## Processo Dirichlet Truncado (DPT) -->
+
+<!-- Assumimos que -->
+
+<!-- \begin{eqnarray*} -->
+<!-- \mathbf{\alpha} &=& (\alpha_1,\ldots,\alpha_J)\sim G;\\ -->
+<!-- G &\sim& DPT(G_0, \gamma, K);\\ -->
+<!-- G_0 &=& N(\mu_{\alpha}, \sigma^2_{\alpha});\\ -->
+<!-- \mu_{\alpha} &\sim& N(m_{\alpha}, s^2_{\alpha});\\ -->
+<!-- \sigma^2_{\alpha} &\sim& IG(a_{\alpha}, b_{\alpha});\\ -->
+<!-- \gamma&\sim& Gama(a_{\gamma}, b_{\gamma}). -->
+<!-- \end{eqnarray*} -->
+
+
+<!-- ### Implementação computacional -->
+
+<!-- Podemos reescrever $G()$ como $$G(\alpha_{j})=\sum\limits_{k=1}^{K}\omega_k I\{\alpha_j=\delta_k\}$$ tal que $\delta_1,\ldots,\delta_k\overset{\mathrm{iid}}{\sim} N(\mu_{\alpha}, \sigma^2_{\alpha})$ -->
+<!-- e os pesos $\omega_1,\ldots,\omega_K$ são obtidos a partir de -->
+
+<!-- - $\omega_1 = \nu_1\ $ e $\ \omega_k = \nu_k\prod\limits_{h<k}(1-\nu_h),\ k=2,\ldots,K$; -->
+<!-- - $\nu_k\overset{\mathrm{iid}}{\sim} Beta(1, \gamma)\ k=1,\ldots,K-1\ $  e $\ \nu_K=1$. -->
+
+<!-- Além disso, devido a parametrização adotada pelo JAGS, reescrevemos -->
+
+<!-- - $\tau_y = 1/\sigma^2_y$ e $\tau_y\sim Gamma(a_{\sigma}, b_{\sigma})$; -->
+<!-- - $\tau_{\alpha}= 1/\sigma^2_{\alpha}$ e $\tau_{\alpha}\sim Gamma(a_{\alpha}, b_{\alpha})$. -->
+
+
+
+# Implementação computacional
+
+
+
+
+# Código do modelo no Jags
+
+```{r echo=TRUE}
+cat("
+model
+{   
+  for(g in 1:G) {  
+    y1[g] ~  dpois(lambda1[g])
+    lambda1[g] = exp(home + att[h[g]] + def[a[g]]) # h e a são passados nos dados
+    
+    y2[g] ~  dpois(lambda2[g])
+    lambda2[g] = exp(att[a[g]] + def[h[g]])
+  }
+  
+  for(t in 1:(T-1)) {
+    att_raw[t] ~ dnorm(mu_att, tau_att)  ## tau = 1/sigma2
+    def_raw[t] ~ dnorm(mu_def, tau_def)
+    att[t] = att_raw[t]
+    def[t] = def_raw[t]
+  }
+  
+  att[T] = 0
+  def[T] = 0
+  
+  tau_eff = 1/sigma_sq_eff ## sigma_sq_eff passado nos dados
+   
+  mu_att ~ dnorm(0, tau_eff)
+  mu_def ~ dnorm(0, tau_eff)
+  
+  tau_att ~ dgamma(a_att, b_att) ## a_att e b_att vem nos dados
+  tau_def ~ dgamma(a_def, b_def)
+}
+", file={model <- tempfile()})
+```
+
+
+
+
+```{r}
+library(rjags)
+# https://math.ntnu.edu.tw/~rtsai/104/bayes/jags/jags-OLR.pdf
+
+load.module("bugs")
+#load.module("mix")
+
+G = 380
+T = 20
+sigma_sq_eff = 100
+
+#
+a_att <- 1
+b_att <- 1
+
+#
+a_def <- 1
+b_def <- 1
+
+
+
+
+## Dados
+
+y1
+y2
+h 
+a 
+
+n_sim <- 5000
+jags.m <- jags.model(model, quiet = TRUE,  ## corrigir 
+                     data = list("N" = length(y), "K"= K, "J" = J, "p" = p,
+                                 "x_mat" = x_mat, "y" = y, "cat" = id,
+                                 "mu_beta" = mu_beta, "t_beta" = t_beta,
+                                 "m_alpha" = m_alpha, "t_alpha" = t_alpha,
+                                 "a_sigma" = a_sigma, "b_sigma" = b_sigma, 
+                                 "a_gamma" = a_gamma, "b_gamma" = b_gamma,
+                                 "a_alpha" = a_alpha, "b_alpha" = b_alpha), 
+                     inits = list(beta = rep(0, p)), n.chains = 1, n.adapt = 1000)
+
+#model_cat_dp <- jags.samples(jags.m, c("beta", "gamma"), n.iter = n_sim, n.burnin = floor(n_sim/2))
+model_cat_dp <- coda.samples(jags.m, c("beta", "alpha", "sigma2_y", "gamma", "mu_alpha", "sigma2_alpha", "S"),
+                             n.iter = n_sim, n.burnin = floor(n_sim/2), quiet = T)
+```
+
+```{r fig.height=10, fig.width=10}
+summary(model_cat_dp)
+plot(model_cat_dp)
+```
+

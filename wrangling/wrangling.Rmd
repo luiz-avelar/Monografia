@@ -120,53 +120,73 @@ dados_list <- list(
   y2 = data$away_team_score
 )
 
-iter <- 5 
+iter <- 4000
 
 fit_sim <- sampling(prg, data = dados_list, chains = 1, iter = iter, cores = 1, refresh = 100)
 ```
 
 
 ```{r}
-G <- 380
 home_team_predict <- c()
 away_team_predict <- c()
+
+home_team_predict_025 <- c()
+away_team_predict_025 <- c()
+
+home_team_predict_975 <- c()
+away_team_predict_975 <- c()
+
 list_of_draws <- extract(fit_sim, pars = c("y1_tilde", "y2_tilde"))
+sample_size <- dim(list_of_draws$y1_tilde)[1]
+G <- 380
 
 for(i in 1:G) {
-  total_home_points <- 0
-  total_away_points <- 0
+  home_team_points_vec <- c()
+  away_team_points_vec <- c()
   
-  for(j in 1:3) {
+  for(j in 1:sample_size) {
     home_team_score <- list_of_draws$y1_tilde[j, i]
     away_team_score <- list_of_draws$y2_tilde[j, i]
     
     if (home_team_score > away_team_score) {
       home_team_points <- 3
       away_team_points <- 0
-    } else if (away_team_score > home_team_score) {
+    } else if (home_team_score < away_team_score) {
       home_team_points <- 0
       away_team_points <- 3
     } else {
       home_team_points <- 1
-      away_team_points <- 1     
+      away_team_points <- 1
     }
-    total_home_points <- total_home_points + home_team_points
-    total_away_points <- total_away_points + away_team_points
+    
+    home_team_points_vec <- append(home_team_points_vec, home_team_points)
+    away_team_points_vec <- append(away_team_points_vec, away_team_points)
+    
   }
   
-  if (total_home_points > total_away_points) {
-    total_home_points <- 3
-    total_away_points <- 0
-  } else if (total_home_points > total_away_points) {
-    total_home_points <- 0
-    total_away_points <- 3
+  home_team_points_sum <- sum(home_team_points_vec)
+  away_team_points_sum <- sum(away_team_points_vec)
+  
+  if (home_team_points_sum > away_team_points_sum) {
+    home_team_point_in_round <- 3
+    away_team_point_in_round <- 0
+  } else if (home_team_points_sum < away_team_points_sum) {
+    home_team_point_in_round <- 0
+    away_team_point_in_round <- 3
   } else {
-    total_home_points <- 1
-    total_away_points <- 1     
+    home_team_point_in_round <- 1
+    away_team_point_in_round <- 1     
   }
   
-  home_team_predict <- append(home_team_predict, total_home_points)
-  away_team_predict <- append(away_team_predict, total_away_points)
+  home_team_predict <- append(home_team_predict, home_team_point_in_round)
+  away_team_predict <- append(away_team_predict, away_team_point_in_round)
+  
+  home_team_predict_025 <- append(home_team_predict_025, quantile(home_team_points_vec, 0.025))
+  away_team_predict_025 <- append(away_team_predict_025, quantile(away_team_points_vec, 0.025))
+  
+  home_team_predict_975 <- append(home_team_predict_975, quantile(home_team_points_vec, 0.975))
+  away_team_predict_975 <- append(away_team_predict_975, quantile(away_team_points_vec, 0.975))
+  
 }
 ```
 
@@ -174,7 +194,13 @@ for(i in 1:G) {
 data <- data |>
   mutate(
     home_team_predict = home_team_predict,
-    away_team_predict = away_team_predict
+    away_team_predict = away_team_predict,
+    
+    home_team_predict_025 = home_team_predict_025,
+    away_team_predict_025 = away_team_predict_025,
+    
+    home_team_predict_975 = home_team_predict_975,
+    away_team_predict_975 = away_team_predict_975
   )
 ```
 
@@ -186,7 +212,12 @@ data_by_team <- data |> select(
   "home_team_points",
   "away_team_points",
   "home_team_predict",
-  "away_team_predict"
+  "away_team_predict",
+  "home_team_predict_025",
+  "away_team_predict_025",
+  "home_team_predict_975",
+  "away_team_predict_975"
+  
 ) |> 
   pivot_longer(
   cols = ends_with("name")
@@ -198,7 +229,15 @@ data_by_team <- data |> select(
   points_predict = case_when(
       name ==  "home_team_name" ~ home_team_predict,
       name ==  "away_team_name" ~ away_team_predict
-      )
+      ),
+  points_predict_025 = case_when(
+      name ==  "home_team_name" ~ home_team_predict_025,
+      name ==  "away_team_name" ~ away_team_predict_025
+      ),
+  points_predict_975 = case_when(
+      name ==  "home_team_name" ~ home_team_predict_975,
+      name ==  "away_team_name" ~ away_team_predict_975
+      ),
 ) |>
   rename(
   team = value
@@ -207,11 +246,15 @@ select(
   round,
   team,
   points,
-  points_predict
+  points_predict,
+  points_predict_025,
+  points_predict_975
 ) |> group_by(team) |>
 mutate(
   cumulative_points = order_by(round, cumsum(points)),
-  cumulative_points_predict = order_by(round, cumsum(points_predict))
+  cumulative_points_predict = order_by(round, cumsum(points_predict)),
+  cumulative_points_predict_025 = order_by(round, cumsum(points_predict_025)),
+  cumulative_points_predict_975 = order_by(round, cumsum(points_predict_975))
 )
 ```
 
@@ -219,6 +262,7 @@ mutate(
 ggplot(data = data_by_team, mapping = aes(x = round)) + 
   geom_line(mapping = aes(y = cumulative_points), color = "red") +
   geom_line(mapping = aes(y = cumulative_points_predict), color = "blue") +
+  geom_ribbon(mapping = aes(ymin = cumulative_points_predict_025, ymax = cumulative_points_predict_975), linetype=2, alpha=0.1) + 
   facet_wrap(~ team)
 ```
 
