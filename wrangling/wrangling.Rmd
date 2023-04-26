@@ -107,6 +107,10 @@ data <- data |>
   )
 ```
 
+```{r}
+write.csv(data, file = "../data/2014_partidas_tidy.csv")
+```
+
 
 ```{r}
 prg <- stan_model(file = "../models/stan/modelo-poisson-misto.stan")
@@ -249,7 +253,9 @@ select(
   points_predict,
   points_predict_025,
   points_predict_975
-) |> group_by(team) |>
+) |> group_by(
+  team
+) |>
 mutate(
   cumulative_points = order_by(round, cumsum(points)),
   cumulative_points_predict = order_by(round, cumsum(points_predict)),

@@ -85,8 +85,8 @@ model {
   mu_def ~ normal(0, 2);
   sigma_att ~ cauchy(0, 2.5);
   sigma_def ~ cauchy(0, 2.5);
-  // 0.2 ~ beta(0.2, 0.2);
-  // p_zero_away ~ beta(0.2, 0.2);
+  // p_zero_home ~ beta(2, 5);
+  // p_zero_away ~ beta(2, 5);
 }
 generated quantities {
   vector[G] y1_tilde;

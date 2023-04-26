@@ -1,5 +1,5 @@
 ---
-title: "Modelo poisson misto JAGs"
+title: "Modelo binomial negativa JAGs"
 output: html_notebook
 ---
 # Código do modelo no Jags
@@ -9,11 +9,15 @@ cat("
 model
 {   
   for(g in 1:G) {  
-    y1[g] ~  dpois(lambda1[g])
+    y1[g] ~  dnegbin(bn_size / (lambda1[g] + bn_size), bn_size)
     lambda1[g] = exp(home + att[h[g]] + def[a[g]]) # h e a são passados nos dados
     
-    y2[g] ~  dpois(lambda2[g])
+    y1_tilde[g] ~  dnegbin(bn_size / (lambda1[g] + bn_size), bn_size)
+
+    y2[g] ~  dnegbin(bn_size / (lambda2[g] + bn_size), bn_size)
     lambda2[g] = exp(att[a[g]] + def[h[g]])
+
+    y2_tilde[g] ~  dnegbin(bn_size / (lambda1[g] + bn_size), bn_size)
   }
   
   for(t in 1:(T-1)) {
@@ -27,23 +31,23 @@ model
   def[T] = 0
   
   tau_eff = 1/sigma_sq_eff ## sigma_sq_eff passado nos dados
+  tau_size = 1/sigma_sq_eff_size ## sigma_sq_eff_size passado nos dados
    
   mu_att ~ dnorm(0, tau_eff)
   mu_def ~ dnorm(0, tau_eff)
   
   home ~ dnorm(0, tau_eff)
   
+  bn_size ~ dt(0, sigma_sq_eff_size, 1) T(0, ) ## df = 1, t-student = cauchy
+  
   tau_att ~ dgamma(a_att, b_att) ## a_att e b_att vem nos dados
   tau_def ~ dgamma(a_def, b_def)
   
   sigma_att = 1/sqrt(tau_att)
   sigma_def = 1/sqrt(tau_def)
-  
 }
 ", file={model <- tempfile()})
 ```
-
-
 
 
 ```{r}
@@ -65,6 +69,9 @@ b_att <- 1
 a_def <- 1
 b_def <- 1
 
+# 
+sigma_sq_eff_size <- 2.5
+
 ## Dados
 data <- read.csv("../../data/2014_partidas_tidy.csv", header = TRUE, encoding = 'UTF-8')
 
@@ -77,6 +84,7 @@ jags.m <- jags.model(model, quiet = TRUE,
                        b_att = b_att,
                        b_def = b_def,
                        sigma_sq_eff = sigma_sq_eff,
+                       sigma_sq_eff_size = sigma_sq_eff_size,
                        T = T,
                        h  = data$home_team_id,
                        a  = data$away_team_id,
@@ -87,7 +95,7 @@ jags.m <- jags.model(model, quiet = TRUE,
                     n.chains = 1, n.adapt = 1000)
 
 model_cat_dp <- coda.samples(jags.m, 
-                             c("y1", "y2"),
+                             c("y1_tilde", "y2_tilde"),
                              n.iter = n_sim, n.burnin = floor(n_sim/2), quiet = T)
 ```
 
@@ -98,10 +106,12 @@ plot(model_cat_dp)
 
 ```{r}
 model_cat_parameters <- coda.samples(jags.m, 
-                             c("home", "mu_att", "mu_def", "sigma_att", "sigma_def"),
+                             c("home", "mu_att", "mu_def", "sigma_att", "sigma_def", "bn_size"),
                              n.iter = n_sim, n.burnin = floor(n_sim/2), quiet = T)
 ```
+
 ```{r}
 plot(model_cat_parameters)
+summary(model_cat_parameters)
 ```
 
