@@ -1,381 +1,381 @@
-"","home_team_id","away_team_id","home_team_score","away_team_score","round","home_team_name","away_team_name","home_team_points","away_team_points","home_team_predict","away_team_predict","home_team_predict_025","away_team_predict_025","home_team_predict_975","away_team_predict_975"
-"1",1,15,0,0,1,"flamengo","goiás",1,1,3,0,0,0,3,3
-"2",5,20,3,0,1,"fluminense","figueirense",3,0,3,0,0,0,3,3
-"3",7,2,3,0,1,"são paulo","botafogo",3,0,3,0,0,0,3,3
-"4",8,16,1,1,1,"santos","sport",1,1,3,0,0,0,3,3
-"5",17,11,1,0,1,"atlético-pr","grêmio",3,0,3,0,0,0,3,3
-"6",9,3,0,0,1,"atlético-mg","corinthians",1,1,3,0,0,0,3,3
-"7",4,10,1,2,1,"bahia","cruzeiro",0,3,3,0,0,0,3,3
-"8",12,13,1,0,1,"internacional","vitória",3,0,3,0,0,0,3,3
-"9",14,6,1,2,1,"criciúma","palmeiras",0,3,3,0,0,0,3,3
-"10",19,18,0,0,1,"chapecoense","coritiba",1,1,3,0,0,0,3,3
-"11",2,12,2,2,2,"botafogo","internacional",1,1,3,0,0,0,3,3
-"12",16,19,2,1,2,"sport","chapecoense",3,0,3,0,0,0,3,3
-"13",3,1,2,0,2,"corinthians","flamengo",3,0,3,0,0,0,3,3
-"14",6,5,0,1,2,"palmeiras","fluminense",0,3,0,3,0,0,3,3
-"15",18,8,0,0,2,"coritiba","santos",1,1,3,0,0,0,3,3
-"16",10,7,1,1,2,"cruzeiro","são paulo",1,1,3,0,0,0,3,3
-"17",13,17,2,2,2,"vitória","atlético-pr",1,1,3,0,0,0,3,3
-"18",11,9,2,1,2,"grêmio","atlético-mg",3,0,3,0,0,0,3,3
-"19",20,4,0,2,2,"figueirense","bahia",0,3,3,0,0,0,3,3
-"20",15,14,1,0,2,"goiás","criciúma",3,0,3,0,0,0,3,3
-"21",2,7,2,4,20,"botafogo","são paulo",0,3,3,0,0,0,3,3
-"22",1,6,4,2,3,"flamengo","palmeiras",3,0,3,0,0,0,3,3
-"23",5,13,1,2,3,"fluminense","vitória",0,3,3,0,0,0,3,3
-"24",16,8,3,1,20,"sport","santos",3,0,3,0,0,0,3,3
-"25",7,18,2,2,3,"são paulo","coritiba",1,1,3,0,0,0,3,3
-"26",8,11,0,0,3,"santos","grêmio",1,1,3,0,0,0,3,3
-"27",17,10,2,3,3,"atlético-pr","cruzeiro",0,3,3,0,0,0,3,3
-"28",3,9,1,0,20,"corinthians","atlético-mg",3,0,3,0,0,0,3,3
-"29",6,14,1,0,20,"palmeiras","criciúma",3,0,3,0,0,0,3,3
-"30",9,15,0,1,3,"atlético-mg","goiás",0,3,3,0,0,0,3,3
-"31",18,19,3,0,20,"coritiba","chapecoense",3,0,3,0,0,0,3,3
-"32",4,2,1,0,3,"bahia","botafogo",3,0,3,0,0,0,3,3
-"33",12,16,2,1,3,"internacional","sport",3,0,3,0,0,0,3,3
-"34",10,4,2,1,20,"cruzeiro","bahia",3,0,3,0,0,0,3,3
-"35",14,20,1,0,3,"criciúma","figueirense",3,0,3,0,0,0,3,3
-"36",13,12,2,0,20,"vitória","internacional",3,0,3,0,0,0,3,3
-"37",19,3,0,1,3,"chapecoense","corinthians",0,3,3,0,0,0,3,3
-"38",2,14,6,0,4,"botafogo","criciúma",3,0,3,0,0,0,3,3
-"39",11,17,1,0,20,"grêmio","atlético-pr",3,0,3,0,0,0,3,3
-"40",5,1,2,0,4,"fluminense","flamengo",3,0,3,0,0,0,3,3
-"41",20,5,1,1,20,"figueirense","fluminense",1,1,3,0,0,0,3,3
-"42",7,3,1,1,4,"são paulo","corinthians",1,1,3,0,0,0,3,3
-"43",15,1,1,0,20,"goiás","flamengo",3,0,3,0,0,0,3,3
-"44",6,15,2,0,4,"palmeiras","goiás",3,0,3,0,0,0,3,3
-"45",1,3,1,0,21,"flamengo","corinthians",3,0,3,0,0,0,3,3
-"46",18,16,0,1,4,"coritiba","sport",0,3,3,0,0,0,3,3
-"47",9,10,2,1,4,"atlético-mg","cruzeiro",3,0,3,0,0,0,3,3
-"48",5,6,3,0,21,"fluminense","palmeiras",3,0,3,0,0,0,3,3
-"49",4,13,1,1,4,"bahia","vitória",1,1,3,0,0,0,3,3
-"50",7,10,2,0,21,"são paulo","cruzeiro",3,0,3,0,0,0,3,3
-"51",12,17,2,1,4,"internacional","atlético-pr",3,0,3,0,0,0,3,3
-"52",20,8,0,2,4,"figueirense","santos",0,3,3,0,0,0,3,3
-"53",8,18,2,1,21,"santos","coritiba",3,0,3,0,0,0,3,3
-"54",19,11,1,2,4,"chapecoense","grêmio",0,3,3,0,0,0,3,3
-"55",17,13,2,0,21,"atlético-pr","vitória",3,0,3,0,0,0,3,3
-"56",1,7,0,2,5,"flamengo","são paulo",0,3,3,0,0,0,3,3
-"57",16,4,1,0,5,"sport","bahia",3,0,3,0,0,0,3,3
-"58",9,11,0,0,21,"atlético-mg","grêmio",1,1,3,0,0,0,3,3
-"59",3,20,0,1,5,"corinthians","figueirense",0,3,3,0,0,0,3,3
-"60",4,20,3,0,21,"bahia","figueirense",3,0,3,0,0,0,3,3
-"61",12,2,2,0,21,"internacional","botafogo",3,0,3,0,0,0,3,3
-"62",14,15,1,0,21,"criciúma","goiás",3,0,3,0,0,0,3,3
-"63",8,9,1,2,5,"santos","atlético-mg",0,3,3,0,0,0,3,3
-"64",19,16,3,1,21,"chapecoense","sport",3,0,3,0,0,0,3,3
-"65",17,19,1,1,5,"atlético-pr","chapecoense",1,1,3,0,0,0,3,3
-"66",10,18,3,2,5,"cruzeiro","coritiba",3,0,3,0,0,0,3,3
-"67",2,4,2,3,22,"botafogo","bahia",0,3,3,0,0,0,3,3
-"68",13,6,0,1,5,"vitória","palmeiras",0,3,3,0,0,0,3,3
-"69",16,12,0,0,22,"sport","internacional",1,1,3,0,0,0,3,3
-"70",3,19,1,1,22,"corinthians","chapecoense",1,1,3,0,0,0,3,3
-"71",11,5,1,0,5,"grêmio","fluminense",3,0,3,0,0,0,3,3
-"72",14,12,0,0,5,"criciúma","internacional",1,1,0,3,0,0,3,3
-"73",15,2,2,0,5,"goiás","botafogo",3,0,3,0,0,0,3,3
-"74",6,1,2,2,22,"palmeiras","flamengo",1,1,3,0,0,0,3,3
-"75",1,4,1,1,6,"flamengo","bahia",1,1,3,0,0,0,3,3
-"76",18,7,3,1,22,"coritiba","são paulo",3,0,3,0,0,0,3,3
-"77",5,7,5,2,6,"fluminense","são paulo",3,0,3,0,0,0,3,3
-"78",3,17,1,1,6,"corinthians","atlético-pr",1,1,3,0,0,0,3,3
-"79",6,20,1,0,6,"palmeiras","figueirense",3,0,3,0,0,0,3,3
-"80",10,17,2,0,22,"cruzeiro","atlético-pr",3,0,3,0,0,0,3,3
-"81",18,12,1,1,6,"coritiba","internacional",1,1,3,0,0,0,3,3
-"82",11,8,0,0,22,"grêmio","santos",1,1,3,0,0,0,3,3
-"83",20,14,1,1,22,"figueirense","criciúma",1,1,3,0,0,0,3,3
-"84",10,16,2,0,6,"cruzeiro","sport",3,0,3,0,0,0,3,3
-"85",15,9,2,3,22,"goiás","atlético-mg",0,3,3,0,0,0,3,3
-"86",13,9,2,3,6,"vitória","atlético-mg",0,3,3,0,0,0,3,3
-"87",11,2,2,1,6,"grêmio","botafogo",3,0,3,0,0,0,3,3
-"88",1,5,1,1,23,"flamengo","fluminense",1,1,3,0,0,0,3,3
-"89",14,19,1,0,6,"criciúma","chapecoense",3,0,3,0,0,0,3,3
-"90",16,18,1,0,23,"sport","coritiba",3,0,3,0,0,0,3,3
-"91",15,8,2,2,6,"goiás","santos",1,1,3,0,0,0,3,3
-"92",3,7,3,2,23,"corinthians","são paulo",3,0,3,0,0,0,3,3
-"93",2,13,1,1,7,"botafogo","vitória",1,1,3,0,0,0,3,3
-"94",8,20,3,1,23,"santos","figueirense",3,0,3,0,0,0,3,3
-"95",17,12,0,1,23,"atlético-pr","internacional",0,3,3,0,0,0,3,3
-"96",10,9,2,3,23,"cruzeiro","atlético-mg",0,3,3,0,0,0,3,3
-"97",13,4,2,1,23,"vitória","bahia",3,0,3,0,0,0,3,3
-"98",11,19,1,0,23,"grêmio","chapecoense",3,0,3,0,0,0,3,3
-"99",16,3,1,4,7,"sport","corinthians",0,3,3,0,0,0,3,3
-"100",14,2,1,1,23,"criciúma","botafogo",1,1,3,0,0,0,3,3
-"101",15,6,6,0,23,"goiás","palmeiras",3,0,3,0,0,0,3,3
-"102",2,15,1,0,24,"botafogo","goiás",3,0,3,0,0,0,3,3
-"103",5,11,0,0,24,"fluminense","grêmio",1,1,3,0,0,0,3,3
-"104",7,11,1,0,7,"são paulo","grêmio",3,0,3,0,0,0,3,3
-"105",7,1,2,2,24,"são paulo","flamengo",1,1,3,0,0,0,3,3
-"106",6,13,2,0,24,"palmeiras","vitória",3,0,3,0,0,0,3,3
-"107",8,1,0,0,7,"santos","flamengo",1,1,3,0,0,0,3,3
-"108",18,10,1,2,24,"coritiba","cruzeiro",0,3,3,0,0,0,3,3
-"109",17,18,2,0,7,"atlético-pr","coritiba",3,0,3,0,0,0,3,3
-"110",9,8,3,2,24,"atlético-mg","santos",3,0,3,0,0,0,3,3
-"111",9,14,0,0,7,"atlético-mg","criciúma",1,1,3,0,0,0,3,3
-"112",4,16,1,0,24,"bahia","sport",3,0,3,0,0,0,3,3
-"113",4,5,0,1,7,"bahia","fluminense",0,3,3,0,0,0,3,3
-"114",12,10,1,3,7,"internacional","cruzeiro",0,3,3,0,0,0,3,3
-"115",12,14,3,0,24,"internacional","criciúma",3,0,3,0,0,0,3,3
-"116",20,15,0,1,7,"figueirense","goiás",0,3,3,0,0,0,3,3
-"117",19,17,3,0,24,"chapecoense","atlético-pr",3,0,3,0,0,0,3,3
-"118",2,11,0,2,25,"botafogo","grêmio",0,3,3,0,0,0,3,3
-"119",16,10,0,0,25,"sport","cruzeiro",1,1,3,0,0,0,3,3
-"120",19,6,2,0,7,"chapecoense","palmeiras",3,0,3,0,0,0,3,3
-"121",7,5,1,3,25,"são paulo","fluminense",0,3,3,0,0,0,3,3
-"122",1,20,1,1,8,"flamengo","figueirense",1,1,3,0,0,0,3,3
-"123",16,11,0,0,8,"sport","grêmio",1,1,3,0,0,0,3,3
-"124",8,15,2,0,25,"santos","goiás",3,0,3,0,0,0,3,3
-"125",3,10,1,0,8,"corinthians","cruzeiro",3,0,3,0,0,0,3,3
-"126",6,2,0,2,8,"palmeiras","botafogo",0,3,3,0,0,0,3,3
-"127",17,3,1,0,25,"atlético-pr","corinthians",3,0,3,0,0,0,3,3
-"128",17,7,2,2,8,"atlético-pr","são paulo",1,1,3,0,0,0,3,3
-"129",9,13,2,0,25,"atlético-mg","vitória",3,0,3,0,0,0,3,3
-"130",4,1,2,1,25,"bahia","flamengo",3,0,3,0,0,0,3,3
-"131",9,5,2,0,8,"atlético-mg","fluminense",3,0,3,0,0,0,3,3
-"132",4,8,0,2,8,"bahia","santos",0,3,3,0,0,0,3,3
-"133",12,18,4,2,25,"internacional","coritiba",3,0,3,0,0,0,3,3
-"134",12,19,2,0,8,"internacional","chapecoense",3,0,3,0,0,0,3,3
-"135",20,6,3,1,25,"figueirense","palmeiras",3,0,3,0,0,0,3,3
-"136",14,18,1,0,8,"criciúma","coritiba",3,0,3,0,0,0,3,3
-"137",19,14,1,1,25,"chapecoense","criciúma",1,1,3,0,0,0,3,3
-"138",15,13,0,0,8,"goiás","vitória",1,1,3,0,0,0,3,3
-"139",2,3,1,0,28,"botafogo","corinthians",3,0,3,0,0,0,3,3
-"140",1,8,0,1,26,"flamengo","santos",0,3,3,0,0,0,3,3
-"141",5,12,1,1,9,"fluminense","internacional",1,1,3,0,0,0,3,3
-"142",5,4,1,1,26,"fluminense","bahia",1,1,3,0,0,0,3,3
-"143",7,9,2,1,9,"são paulo","atlético-mg",3,0,3,0,0,0,3,3
-"144",3,16,3,0,26,"corinthians","sport",3,0,3,0,0,0,3,3
-"145",6,19,4,2,26,"palmeiras","chapecoense",3,0,3,0,0,0,3,3
-"146",8,14,2,0,9,"santos","criciúma",3,0,3,0,0,0,3,3
-"147",18,17,1,0,26,"coritiba","atlético-pr",3,0,3,0,0,0,3,3
-"148",18,15,3,0,9,"coritiba","goiás",3,0,3,0,0,0,3,3
-"149",10,1,3,0,9,"cruzeiro","flamengo",3,0,3,0,0,0,3,3
-"150",10,12,2,1,26,"cruzeiro","internacional",3,0,3,0,0,0,3,3
-"151",13,16,0,1,9,"vitória","sport",0,3,3,0,0,0,3,3
-"152",11,6,0,0,9,"grêmio","palmeiras",1,1,3,0,0,0,3,3
-"153",13,2,2,1,26,"vitória","botafogo",3,0,3,0,0,0,3,3
-"154",20,17,1,3,9,"figueirense","atlético-pr",0,3,3,0,0,0,3,3
-"155",11,7,0,1,26,"grêmio","são paulo",0,3,3,0,0,0,3,3
-"156",19,4,2,1,9,"chapecoense","bahia",3,0,3,0,0,0,3,3
-"157",1,17,1,2,10,"flamengo","atlético-pr",0,3,3,0,0,0,3,3
-"158",14,9,3,1,26,"criciúma","atlético-mg",3,0,0,3,0,0,3,3
-"159",16,2,1,0,10,"sport","botafogo",3,0,3,0,0,0,3,3
-"160",3,12,2,1,10,"corinthians","internacional",3,0,3,0,0,0,3,3
-"161",8,6,2,0,10,"santos","palmeiras",3,0,3,0,0,0,3,3
-"162",15,20,1,0,26,"goiás","figueirense",3,0,3,0,0,0,3,3
-"163",18,20,0,2,10,"coritiba","figueirense",0,3,3,0,0,0,3,3
-"164",10,13,3,1,10,"cruzeiro","vitória",3,0,3,0,0,0,3,3
-"165",4,7,0,2,10,"bahia","são paulo",0,3,3,0,0,0,3,3
-"166",2,18,1,0,11,"botafogo","coritiba",3,0,3,0,0,0,3,3
-"167",5,8,1,0,11,"fluminense","santos",3,0,3,0,0,0,3,3
-"168",11,15,0,0,10,"grêmio","goiás",1,1,3,0,0,0,3,3
-"169",7,19,0,1,11,"são paulo","chapecoense",0,3,3,0,0,0,3,3
-"170",14,5,3,2,10,"criciúma","fluminense",3,0,0,3,0,0,3,3
-"171",6,10,1,2,11,"palmeiras","cruzeiro",0,3,0,3,0,0,3,3
-"172",19,9,1,1,10,"chapecoense","atlético-mg",1,1,3,0,0,0,3,3
-"173",17,14,2,0,11,"atlético-pr","criciúma",3,0,3,0,0,0,3,3
-"174",9,4,1,1,11,"atlético-mg","bahia",1,1,3,0,0,0,3,3
-"175",13,3,0,0,11,"vitória","corinthians",1,1,3,0,0,0,3,3
-"176",12,1,4,0,11,"internacional","flamengo",3,0,3,0,0,0,3,3
-"177",20,11,0,1,11,"figueirense","grêmio",0,3,3,0,0,0,3,3
-"178",15,16,0,0,11,"goiás","sport",1,1,3,0,0,0,3,3
-"179",1,2,1,0,12,"flamengo","botafogo",3,0,3,0,0,0,3,3
-"180",16,9,2,1,12,"sport","atlético-mg",3,0,3,0,0,0,3,3
-"181",3,6,2,0,12,"corinthians","palmeiras",3,0,3,0,0,0,3,3
-"182",8,19,3,0,12,"santos","chapecoense",3,0,3,0,0,0,3,3
-"183",13,5,3,1,22,"vitória","fluminense",3,0,3,0,0,0,3,3
-"184",17,5,0,3,12,"atlético-pr","fluminense",0,3,3,0,0,0,3,3
-"185",10,20,5,0,12,"cruzeiro","figueirense",3,0,3,0,0,0,3,3
-"186",4,12,0,1,12,"bahia","internacional",0,3,3,0,0,0,3,3
-"187",11,18,2,3,12,"grêmio","coritiba",0,3,3,0,0,0,3,3
-"188",14,13,1,3,12,"criciúma","vitória",0,3,3,0,0,0,3,3
-"189",15,7,2,1,12,"goiás","são paulo",3,0,3,0,0,0,3,3
-"190",2,10,1,1,13,"botafogo","cruzeiro",1,1,0,3,0,0,3,3
-"191",2,6,0,1,27,"botafogo","palmeiras",0,3,3,0,0,0,3,3
-"192",5,15,2,0,13,"fluminense","goiás",3,0,3,0,0,0,3,3
-"193",7,14,1,1,13,"são paulo","criciúma",1,1,3,0,0,0,3,3
-"194",5,9,0,0,27,"fluminense","atlético-mg",1,1,3,0,0,0,3,3
-"195",7,17,1,0,27,"são paulo","atlético-pr",3,0,3,0,0,0,3,3
-"196",6,4,1,1,13,"palmeiras","bahia",1,1,3,0,0,0,3,3
-"197",18,3,0,0,13,"coritiba","corinthians",1,1,3,0,0,0,3,3
-"198",9,17,3,1,13,"atlético-mg","atlético-pr",3,0,3,0,0,0,3,3
-"199",8,4,1,0,27,"santos","bahia",3,0,3,0,0,0,3,3
-"200",13,11,2,1,13,"vitória","grêmio",3,0,3,0,0,0,3,3
-"201",12,8,1,0,13,"internacional","santos",3,0,3,0,0,0,3,3
-"202",18,14,1,0,27,"coritiba","criciúma",3,0,3,0,0,0,3,3
-"203",20,16,3,0,13,"figueirense","sport",3,0,3,0,0,0,3,3
-"204",19,1,1,0,13,"chapecoense","flamengo",3,0,3,0,0,0,3,3
-"205",10,3,0,1,27,"cruzeiro","corinthians",0,3,3,0,0,0,3,3
-"206",13,15,2,2,27,"vitória","goiás",1,1,3,0,0,0,3,3
-"207",11,16,2,0,27,"grêmio","sport",3,0,3,0,0,0,3,3
-"208",1,16,1,0,14,"flamengo","sport",3,0,3,0,0,0,3,3
-"209",5,18,1,1,14,"fluminense","coritiba",1,1,3,0,0,0,3,3
-"210",20,1,1,2,27,"figueirense","flamengo",0,3,3,0,0,0,3,3
-"211",7,13,3,1,14,"são paulo","vitória",3,0,3,0,0,0,3,3
-"212",8,3,0,1,14,"santos","corinthians",0,3,3,0,0,0,3,3
-"213",19,12,5,0,27,"chapecoense","internacional",3,0,3,0,0,0,3,3
-"214",17,2,2,0,14,"atlético-pr","botafogo",3,0,3,0,0,0,3,3
-"215",9,6,2,1,14,"atlético-mg","palmeiras",3,0,3,0,0,0,3,3
-"216",4,15,1,0,14,"bahia","goiás",3,0,3,0,0,0,3,3
-"217",12,11,2,0,14,"internacional","grêmio",3,0,3,0,0,0,3,3
-"218",14,10,0,0,14,"criciúma","cruzeiro",1,1,0,3,0,0,3,3
-"219",19,20,0,1,14,"chapecoense","figueirense",0,3,3,0,0,0,3,3
-"220",1,10,3,0,28,"flamengo","cruzeiro",3,0,3,0,0,0,3,3
-"221",16,13,1,2,28,"sport","vitória",0,3,3,0,0,0,3,3
-"222",2,5,2,0,15,"botafogo","fluminense",3,0,3,0,0,0,3,3
-"223",3,2,1,1,9,"corinthians","botafogo",1,1,3,0,0,0,3,3
-"224",16,17,1,1,15,"sport","atlético-pr",1,1,3,0,0,0,3,3
-"225",3,4,1,1,15,"corinthians","bahia",1,1,3,0,0,0,3,3
-"226",6,7,1,2,15,"palmeiras","são paulo",0,3,3,0,0,0,3,3
-"227",6,11,2,1,28,"palmeiras","grêmio",3,0,3,0,0,0,3,3
-"228",18,1,0,1,15,"coritiba","flamengo",0,3,3,0,0,0,3,3
-"229",17,20,3,0,28,"atlético-pr","figueirense",3,0,3,0,0,0,3,3
-"230",10,8,3,0,15,"cruzeiro","santos",3,0,3,0,0,0,3,3
-"231",13,19,0,0,15,"vitória","chapecoense",1,1,3,0,0,0,3,3
-"232",9,7,1,0,28,"atlético-mg","são paulo",3,0,3,0,0,0,3,3
-"233",11,14,2,0,15,"grêmio","criciúma",3,0,3,0,0,0,3,3
-"234",20,9,2,2,15,"figueirense","atlético-mg",1,1,3,0,0,0,3,3
-"235",4,19,0,1,28,"bahia","chapecoense",0,3,3,0,0,0,3,3
-"236",15,12,0,1,15,"goiás","internacional",0,3,3,0,0,0,3,3
-"237",12,5,2,1,28,"internacional","fluminense",3,0,3,0,0,0,3,3
-"238",14,8,3,0,28,"criciúma","santos",3,0,3,0,0,0,3,3
-"239",15,18,3,0,28,"goiás","coritiba",3,0,3,0,0,0,3,3
-"240",1,9,2,1,16,"flamengo","atlético-mg",3,0,3,0,0,0,3,3
-"241",16,6,2,1,16,"sport","palmeiras",3,0,3,0,0,0,3,3
-"242",3,15,5,2,16,"corinthians","goiás",3,0,3,0,0,0,3,3
-"243",8,17,2,0,16,"santos","atlético-pr",3,0,3,0,0,0,3,3
-"244",18,13,2,0,16,"coritiba","vitória",3,0,3,0,0,0,3,3
-"245",10,11,1,0,16,"cruzeiro","grêmio",3,0,3,0,0,0,3,3
-"246",4,14,0,0,16,"bahia","criciúma",1,1,3,0,0,0,3,3
-"247",12,7,0,1,16,"internacional","são paulo",0,3,3,0,0,0,3,3
-"248",20,2,1,0,16,"figueirense","botafogo",3,0,3,0,0,0,3,3
-"249",19,5,1,0,16,"chapecoense","fluminense",3,0,3,0,0,0,3,3
-"250",20,3,1,0,24,"figueirense","corinthians",3,0,3,0,0,0,3,3
-"251",2,19,1,0,17,"botafogo","chapecoense",3,0,3,0,0,0,3,3
-"252",5,16,4,0,17,"fluminense","sport",3,0,3,0,0,0,3,3
-"253",7,8,2,1,17,"são paulo","santos",3,0,3,0,0,0,3,3
-"254",6,18,1,0,17,"palmeiras","coritiba",3,0,3,0,0,0,3,3
-"255",17,4,0,0,17,"atlético-pr","bahia",1,1,3,0,0,0,3,3
-"256",9,12,1,0,17,"atlético-mg","internacional",3,0,3,0,0,0,3,3
-"257",13,20,0,1,17,"vitória","figueirense",0,3,3,0,0,0,3,3
-"258",11,3,2,1,17,"grêmio","corinthians",3,0,3,0,0,0,3,3
-"259",14,1,0,2,17,"criciúma","flamengo",0,3,3,0,0,0,3,3
-"260",15,10,0,1,17,"goiás","cruzeiro",0,3,3,0,0,0,3,3
-"261",2,1,2,1,31,"botafogo","flamengo",3,0,3,0,0,0,3,3
-"262",2,8,1,0,18,"botafogo","santos",3,0,3,0,0,0,3,3
-"263",16,14,2,0,18,"sport","criciúma",3,0,3,0,0,0,3,3
-"264",3,5,1,1,18,"corinthians","fluminense",1,1,3,0,0,0,3,3
-"265",6,12,0,1,18,"palmeiras","internacional",0,3,3,0,0,0,3,3
-"266",5,17,2,1,31,"fluminense","atlético-pr",3,0,3,0,0,0,3,3
-"267",2,9,0,0,38,"botafogo","atlético-mg",1,1,3,0,0,0,3,3
-"268",18,9,0,0,18,"coritiba","atlético-mg",1,1,3,0,0,0,3,3
-"269",10,19,4,2,18,"cruzeiro","chapecoense",3,0,3,0,0,0,3,3
-"270",13,1,1,2,18,"vitória","flamengo",0,3,3,0,0,0,3,3
-"271",7,15,3,0,31,"são paulo","goiás",3,0,3,0,0,0,3,3
-"272",6,3,1,1,31,"palmeiras","corinthians",1,1,3,0,0,0,3,3
-"273",16,7,1,0,38,"sport","são paulo",3,0,3,0,0,0,3,3
-"274",3,14,2,1,38,"corinthians","criciúma",3,0,3,0,0,0,3,3
-"275",6,17,1,1,38,"palmeiras","atlético-pr",1,1,3,0,0,0,3,3
-"276",18,11,1,1,31,"coritiba","grêmio",1,1,3,0,0,0,3,3
-"277",18,4,3,2,38,"coritiba","bahia",3,0,3,0,0,0,3,3
-"278",10,5,2,1,38,"cruzeiro","fluminense",3,0,3,0,0,0,3,3
-"279",11,4,1,0,18,"grêmio","bahia",3,0,3,0,0,0,3,3
-"280",13,8,0,1,38,"vitória","santos",0,3,3,0,0,0,3,3
-"281",20,7,1,1,18,"figueirense","são paulo",1,1,3,0,0,0,3,3
-"282",9,16,3,2,31,"atlético-mg","sport",3,0,3,0,0,0,3,3
-"283",15,17,3,1,18,"goiás","atlético-pr",3,0,3,0,0,0,3,3
-"284",11,1,1,1,38,"grêmio","flamengo",1,1,3,0,0,0,3,3
-"285",13,14,3,1,31,"vitória","criciúma",3,0,3,0,0,0,3,3
-"286",20,12,1,2,38,"figueirense","internacional",0,3,3,0,0,0,3,3
-"287",1,11,0,1,19,"flamengo","grêmio",0,3,3,0,0,0,3,3
-"288",12,4,2,0,31,"internacional","bahia",3,0,3,0,0,0,3,3
-"289",15,19,4,2,38,"goiás","chapecoense",3,0,3,0,0,0,3,3
-"290",5,10,3,3,19,"fluminense","cruzeiro",1,1,3,0,0,0,3,3
-"291",20,10,1,1,31,"figueirense","cruzeiro",1,1,0,3,0,0,3,3
-"292",1,13,4,0,37,"flamengo","vitória",3,0,3,0,0,0,3,3
-"293",7,16,2,0,19,"são paulo","sport",3,0,3,0,0,0,3,3
-"294",8,13,3,1,19,"santos","vitória",3,0,3,0,0,0,3,3
-"295",17,6,1,1,19,"atlético-pr","palmeiras",1,1,3,0,0,0,3,3
-"296",5,3,5,2,37,"fluminense","corinthians",3,0,3,0,0,0,3,3
-"297",9,2,1,0,19,"atlético-mg","botafogo",3,0,3,0,0,0,3,3
-"298",4,18,0,0,19,"bahia","coritiba",1,1,3,0,0,0,3,3
-"299",19,8,1,1,31,"chapecoense","santos",1,1,3,0,0,0,3,3
-"300",12,20,2,3,19,"internacional","figueirense",0,3,3,0,0,0,3,3
-"301",7,20,1,1,37,"são paulo","figueirense",1,1,3,0,0,0,3,3
-"302",14,3,0,0,19,"criciúma","corinthians",1,1,0,3,0,0,3,3
-"303",8,2,2,0,37,"santos","botafogo",3,0,3,0,0,0,3,3
-"304",19,15,0,0,19,"chapecoense","goiás",1,1,3,0,0,0,3,3
-"305",17,15,1,0,37,"atlético-pr","goiás",3,0,3,0,0,0,3,3
-"306",1,19,3,0,32,"flamengo","chapecoense",3,0,3,0,0,0,3,3
-"307",9,18,1,2,37,"atlético-mg","coritiba",0,3,3,0,0,0,3,3
-"308",4,11,1,0,37,"bahia","grêmio",3,0,3,0,0,0,3,3
-"309",2,20,0,1,35,"botafogo","figueirense",0,3,3,0,0,0,3,3
-"310",16,20,1,0,32,"sport","figueirense",3,0,3,0,0,0,3,3
-"311",1,18,3,2,34,"flamengo","coritiba",3,0,3,0,0,0,3,3
-"312",12,6,3,1,37,"internacional","palmeiras",3,0,3,0,0,0,3,3
-"313",5,2,1,0,34,"fluminense","botafogo",3,0,3,0,0,0,3,3
-"314",5,19,1,4,35,"fluminense","chapecoense",0,3,3,0,0,0,3,3
-"315",3,18,2,2,32,"corinthians","coritiba",1,1,3,0,0,0,3,3
-"316",7,6,2,0,34,"são paulo","palmeiras",3,0,3,0,0,0,3,3
-"317",14,16,2,2,37,"criciúma","sport",1,1,3,0,0,0,3,3
-"318",8,10,0,1,34,"santos","cruzeiro",0,3,3,0,0,0,3,3
-"319",7,12,1,1,35,"são paulo","internacional",1,1,3,0,0,0,3,3
-"320",19,10,1,1,37,"chapecoense","cruzeiro",1,1,3,0,0,0,3,3
-"321",17,16,0,1,34,"atlético-pr","sport",0,3,3,0,0,0,3,3
-"322",9,20,1,1,34,"atlético-mg","figueirense",1,1,3,0,0,0,3,3
-"323",6,16,0,2,35,"palmeiras","sport",0,3,3,0,0,0,3,3
-"324",4,3,1,2,34,"bahia","corinthians",0,3,3,0,0,0,3,3
-"325",8,12,1,2,32,"santos","internacional",0,3,3,0,0,0,3,3
-"326",12,15,1,0,34,"internacional","goiás",3,0,3,0,0,0,3,3
-"327",17,9,1,0,32,"atlético-pr","atlético-mg",3,0,3,0,0,0,3,3
-"328",17,8,1,1,35,"atlético-pr","santos",1,1,3,0,0,0,3,3
-"329",14,11,0,3,34,"criciúma","grêmio",0,3,3,0,0,0,3,3
-"330",19,13,0,1,34,"chapecoense","vitória",0,3,3,0,0,0,3,3
-"331",10,2,2,1,32,"cruzeiro","botafogo",3,0,3,0,0,0,3,3
-"332",9,1,4,0,35,"atlético-mg","flamengo",3,0,3,0,0,0,3,3
-"333",4,6,0,1,32,"bahia","palmeiras",0,3,3,0,0,0,3,3
-"334",13,18,1,1,35,"vitória","coritiba",1,1,3,0,0,0,3,3
-"335",2,17,0,2,33,"botafogo","atlético-pr",0,3,3,0,0,0,3,3
-"336",11,13,1,0,32,"grêmio","vitória",3,0,3,0,0,0,3,3
-"337",16,1,2,2,33,"sport","flamengo",1,1,3,0,0,0,3,3
-"338",3,8,1,0,33,"corinthians","santos",3,0,3,0,0,0,3,3
-"339",6,9,0,2,33,"palmeiras","atlético-mg",0,3,3,0,0,0,3,3
-"340",14,7,1,2,32,"criciúma","são paulo",0,3,0,3,0,0,3,3
-"341",18,5,1,0,33,"coritiba","fluminense",3,0,3,0,0,0,3,3
-"342",11,10,1,2,35,"grêmio","cruzeiro",0,3,3,0,0,0,3,3
-"343",15,5,0,2,32,"goiás","fluminense",0,3,3,0,0,0,3,3
-"344",10,14,3,1,33,"cruzeiro","criciúma",3,0,3,0,0,0,3,3
-"345",14,4,0,1,35,"criciúma","bahia",0,3,3,0,0,0,3,3
-"346",15,3,0,1,35,"goiás","corinthians",0,3,3,0,0,0,3,3
-"347",13,7,1,2,33,"vitória","são paulo",0,3,3,0,0,0,3,3
-"348",11,12,4,1,33,"grêmio","internacional",3,0,3,0,0,0,3,3
-"349",20,19,1,0,33,"figueirense","chapecoense",3,0,3,0,0,0,3,3
-"350",15,4,3,0,33,"goiás","bahia",3,0,3,0,0,0,3,3
-"351",1,14,1,1,36,"flamengo","criciúma",1,1,3,0,0,0,3,3
-"352",1,12,2,0,30,"flamengo","internacional",3,0,3,0,0,0,3,3
-"353",16,5,2,2,36,"sport","fluminense",1,1,3,0,0,0,3,3
-"354",16,15,0,1,30,"sport","goiás",0,3,3,0,0,0,3,3
-"355",3,13,2,1,30,"corinthians","vitória",3,0,3,0,0,0,3,3
-"356",8,5,0,1,30,"santos","fluminense",0,3,3,0,0,0,3,3
-"357",3,11,1,0,36,"corinthians","grêmio",3,0,3,0,0,0,3,3
-"358",18,2,2,0,30,"coritiba","botafogo",3,0,3,0,0,0,3,3
-"359",10,6,1,1,30,"cruzeiro","palmeiras",1,1,3,0,0,0,3,3
-"360",8,7,0,1,36,"santos","são paulo",0,3,3,0,0,0,3,3
-"361",4,9,1,1,30,"bahia","atlético-mg",1,1,3,0,0,0,3,3
-"362",11,20,1,0,30,"grêmio","figueirense",3,0,3,0,0,0,3,3
-"363",14,17,0,1,30,"criciúma","atlético-pr",0,3,3,0,0,0,3,3
-"364",18,6,2,0,36,"coritiba","palmeiras",3,0,3,0,0,0,3,3
-"365",19,7,0,0,30,"chapecoense","são paulo",1,1,3,0,0,0,3,3
-"366",10,15,2,1,36,"cruzeiro","goiás",3,0,3,0,0,0,3,3
-"367",4,17,1,2,36,"bahia","atlético-pr",0,3,3,0,0,0,3,3
-"368",12,9,2,1,36,"internacional","atlético-mg",3,0,3,0,0,0,3,3
-"369",20,13,2,0,36,"figueirense","vitória",3,0,3,0,0,0,3,3
-"370",19,2,2,0,36,"chapecoense","botafogo",3,0,3,0,0,0,3,3
-"371",2,16,1,1,29,"botafogo","sport",1,1,3,0,0,0,3,3
-"372",5,14,4,2,29,"fluminense","criciúma",3,0,3,0,0,0,3,3
-"373",7,4,2,1,29,"são paulo","bahia",3,0,3,0,0,0,3,3
-"374",6,8,1,3,29,"palmeiras","santos",0,3,3,0,0,0,3,3
-"375",17,1,2,1,29,"atlético-pr","flamengo",3,0,3,0,0,0,3,3
-"376",9,19,1,0,29,"atlético-mg","chapecoense",3,0,3,0,0,0,3,3
-"377",13,10,0,1,29,"vitória","cruzeiro",0,3,0,3,0,0,3,3
-"378",12,3,1,2,29,"internacional","corinthians",0,3,3,0,0,0,3,3
-"379",20,18,4,0,29,"figueirense","coritiba",3,0,3,0,0,0,3,3
-"380",15,11,0,0,29,"goiás","grêmio",1,1,3,0,0,0,3,3
+"","home_team_id","away_team_id","home_team_score","away_team_score","round","home_team_name","away_team_name","home_team_points","away_team_points"
+"1",1,15,0,0,1,"flamengo","goiás",1,1
+"2",5,20,3,0,1,"fluminense","figueirense",3,0
+"3",7,2,3,0,1,"são paulo","botafogo",3,0
+"4",8,16,1,1,1,"santos","sport",1,1
+"5",17,11,1,0,1,"atlético-pr","grêmio",3,0
+"6",9,3,0,0,1,"atlético-mg","corinthians",1,1
+"7",4,10,1,2,1,"bahia","cruzeiro",0,3
+"8",12,13,1,0,1,"internacional","vitória",3,0
+"9",14,6,1,2,1,"criciúma","palmeiras",0,3
+"10",19,18,0,0,1,"chapecoense","coritiba",1,1
+"11",2,12,2,2,2,"botafogo","internacional",1,1
+"12",16,19,2,1,2,"sport","chapecoense",3,0
+"13",3,1,2,0,2,"corinthians","flamengo",3,0
+"14",6,5,0,1,2,"palmeiras","fluminense",0,3
+"15",18,8,0,0,2,"coritiba","santos",1,1
+"16",10,7,1,1,2,"cruzeiro","são paulo",1,1
+"17",13,17,2,2,2,"vitória","atlético-pr",1,1
+"18",11,9,2,1,2,"grêmio","atlético-mg",3,0
+"19",20,4,0,2,2,"figueirense","bahia",0,3
+"20",15,14,1,0,2,"goiás","criciúma",3,0
+"21",2,7,2,4,20,"botafogo","são paulo",0,3
+"22",1,6,4,2,3,"flamengo","palmeiras",3,0
+"23",5,13,1,2,3,"fluminense","vitória",0,3
+"24",16,8,3,1,20,"sport","santos",3,0
+"25",7,18,2,2,3,"são paulo","coritiba",1,1
+"26",8,11,0,0,3,"santos","grêmio",1,1
+"27",17,10,2,3,3,"atlético-pr","cruzeiro",0,3
+"28",3,9,1,0,20,"corinthians","atlético-mg",3,0
+"29",6,14,1,0,20,"palmeiras","criciúma",3,0
+"30",9,15,0,1,3,"atlético-mg","goiás",0,3
+"31",18,19,3,0,20,"coritiba","chapecoense",3,0
+"32",4,2,1,0,3,"bahia","botafogo",3,0
+"33",12,16,2,1,3,"internacional","sport",3,0
+"34",10,4,2,1,20,"cruzeiro","bahia",3,0
+"35",14,20,1,0,3,"criciúma","figueirense",3,0
+"36",13,12,2,0,20,"vitória","internacional",3,0
+"37",19,3,0,1,3,"chapecoense","corinthians",0,3
+"38",2,14,6,0,4,"botafogo","criciúma",3,0
+"39",11,17,1,0,20,"grêmio","atlético-pr",3,0
+"40",5,1,2,0,4,"fluminense","flamengo",3,0
+"41",20,5,1,1,20,"figueirense","fluminense",1,1
+"42",7,3,1,1,4,"são paulo","corinthians",1,1
+"43",15,1,1,0,20,"goiás","flamengo",3,0
+"44",6,15,2,0,4,"palmeiras","goiás",3,0
+"45",1,3,1,0,21,"flamengo","corinthians",3,0
+"46",18,16,0,1,4,"coritiba","sport",0,3
+"47",9,10,2,1,4,"atlético-mg","cruzeiro",3,0
+"48",5,6,3,0,21,"fluminense","palmeiras",3,0
+"49",4,13,1,1,4,"bahia","vitória",1,1
+"50",7,10,2,0,21,"são paulo","cruzeiro",3,0
+"51",12,17,2,1,4,"internacional","atlético-pr",3,0
+"52",20,8,0,2,4,"figueirense","santos",0,3
+"53",8,18,2,1,21,"santos","coritiba",3,0
+"54",19,11,1,2,4,"chapecoense","grêmio",0,3
+"55",17,13,2,0,21,"atlético-pr","vitória",3,0
+"56",1,7,0,2,5,"flamengo","são paulo",0,3
+"57",16,4,1,0,5,"sport","bahia",3,0
+"58",9,11,0,0,21,"atlético-mg","grêmio",1,1
+"59",3,20,0,1,5,"corinthians","figueirense",0,3
+"60",4,20,3,0,21,"bahia","figueirense",3,0
+"61",12,2,2,0,21,"internacional","botafogo",3,0
+"62",14,15,1,0,21,"criciúma","goiás",3,0
+"63",8,9,1,2,5,"santos","atlético-mg",0,3
+"64",19,16,3,1,21,"chapecoense","sport",3,0
+"65",17,19,1,1,5,"atlético-pr","chapecoense",1,1
+"66",10,18,3,2,5,"cruzeiro","coritiba",3,0
+"67",2,4,2,3,22,"botafogo","bahia",0,3
+"68",13,6,0,1,5,"vitória","palmeiras",0,3
+"69",16,12,0,0,22,"sport","internacional",1,1
+"70",3,19,1,1,22,"corinthians","chapecoense",1,1
+"71",11,5,1,0,5,"grêmio","fluminense",3,0
+"72",14,12,0,0,5,"criciúma","internacional",1,1
+"73",15,2,2,0,5,"goiás","botafogo",3,0
+"74",6,1,2,2,22,"palmeiras","flamengo",1,1
+"75",1,4,1,1,6,"flamengo","bahia",1,1
+"76",18,7,3,1,22,"coritiba","são paulo",3,0
+"77",5,7,5,2,6,"fluminense","são paulo",3,0
+"78",3,17,1,1,6,"corinthians","atlético-pr",1,1
+"79",6,20,1,0,6,"palmeiras","figueirense",3,0
+"80",10,17,2,0,22,"cruzeiro","atlético-pr",3,0
+"81",18,12,1,1,6,"coritiba","internacional",1,1
+"82",11,8,0,0,22,"grêmio","santos",1,1
+"83",20,14,1,1,22,"figueirense","criciúma",1,1
+"84",10,16,2,0,6,"cruzeiro","sport",3,0
+"85",15,9,2,3,22,"goiás","atlético-mg",0,3
+"86",13,9,2,3,6,"vitória","atlético-mg",0,3
+"87",11,2,2,1,6,"grêmio","botafogo",3,0
+"88",1,5,1,1,23,"flamengo","fluminense",1,1
+"89",14,19,1,0,6,"criciúma","chapecoense",3,0
+"90",16,18,1,0,23,"sport","coritiba",3,0
+"91",15,8,2,2,6,"goiás","santos",1,1
+"92",3,7,3,2,23,"corinthians","são paulo",3,0
+"93",2,13,1,1,7,"botafogo","vitória",1,1
+"94",8,20,3,1,23,"santos","figueirense",3,0
+"95",17,12,0,1,23,"atlético-pr","internacional",0,3
+"96",10,9,2,3,23,"cruzeiro","atlético-mg",0,3
+"97",13,4,2,1,23,"vitória","bahia",3,0
+"98",11,19,1,0,23,"grêmio","chapecoense",3,0
+"99",16,3,1,4,7,"sport","corinthians",0,3
+"100",14,2,1,1,23,"criciúma","botafogo",1,1
+"101",15,6,6,0,23,"goiás","palmeiras",3,0
+"102",2,15,1,0,24,"botafogo","goiás",3,0
+"103",5,11,0,0,24,"fluminense","grêmio",1,1
+"104",7,11,1,0,7,"são paulo","grêmio",3,0
+"105",7,1,2,2,24,"são paulo","flamengo",1,1
+"106",6,13,2,0,24,"palmeiras","vitória",3,0
+"107",8,1,0,0,7,"santos","flamengo",1,1
+"108",18,10,1,2,24,"coritiba","cruzeiro",0,3
+"109",17,18,2,0,7,"atlético-pr","coritiba",3,0
+"110",9,8,3,2,24,"atlético-mg","santos",3,0
+"111",9,14,0,0,7,"atlético-mg","criciúma",1,1
+"112",4,16,1,0,24,"bahia","sport",3,0
+"113",4,5,0,1,7,"bahia","fluminense",0,3
+"114",12,10,1,3,7,"internacional","cruzeiro",0,3
+"115",12,14,3,0,24,"internacional","criciúma",3,0
+"116",20,15,0,1,7,"figueirense","goiás",0,3
+"117",19,17,3,0,24,"chapecoense","atlético-pr",3,0
+"118",2,11,0,2,25,"botafogo","grêmio",0,3
+"119",16,10,0,0,25,"sport","cruzeiro",1,1
+"120",19,6,2,0,7,"chapecoense","palmeiras",3,0
+"121",7,5,1,3,25,"são paulo","fluminense",0,3
+"122",1,20,1,1,8,"flamengo","figueirense",1,1
+"123",16,11,0,0,8,"sport","grêmio",1,1
+"124",8,15,2,0,25,"santos","goiás",3,0
+"125",3,10,1,0,8,"corinthians","cruzeiro",3,0
+"126",6,2,0,2,8,"palmeiras","botafogo",0,3
+"127",17,3,1,0,25,"atlético-pr","corinthians",3,0
+"128",17,7,2,2,8,"atlético-pr","são paulo",1,1
+"129",9,13,2,0,25,"atlético-mg","vitória",3,0
+"130",4,1,2,1,25,"bahia","flamengo",3,0
+"131",9,5,2,0,8,"atlético-mg","fluminense",3,0
+"132",4,8,0,2,8,"bahia","santos",0,3
+"133",12,18,4,2,25,"internacional","coritiba",3,0
+"134",12,19,2,0,8,"internacional","chapecoense",3,0
+"135",20,6,3,1,25,"figueirense","palmeiras",3,0
+"136",14,18,1,0,8,"criciúma","coritiba",3,0
+"137",19,14,1,1,25,"chapecoense","criciúma",1,1
+"138",15,13,0,0,8,"goiás","vitória",1,1
+"139",2,3,1,0,28,"botafogo","corinthians",3,0
+"140",1,8,0,1,26,"flamengo","santos",0,3
+"141",5,12,1,1,9,"fluminense","internacional",1,1
+"142",5,4,1,1,26,"fluminense","bahia",1,1
+"143",7,9,2,1,9,"são paulo","atlético-mg",3,0
+"144",3,16,3,0,26,"corinthians","sport",3,0
+"145",6,19,4,2,26,"palmeiras","chapecoense",3,0
+"146",8,14,2,0,9,"santos","criciúma",3,0
+"147",18,17,1,0,26,"coritiba","atlético-pr",3,0
+"148",18,15,3,0,9,"coritiba","goiás",3,0
+"149",10,1,3,0,9,"cruzeiro","flamengo",3,0
+"150",10,12,2,1,26,"cruzeiro","internacional",3,0
+"151",13,16,0,1,9,"vitória","sport",0,3
+"152",11,6,0,0,9,"grêmio","palmeiras",1,1
+"153",13,2,2,1,26,"vitória","botafogo",3,0
+"154",20,17,1,3,9,"figueirense","atlético-pr",0,3
+"155",11,7,0,1,26,"grêmio","são paulo",0,3
+"156",19,4,2,1,9,"chapecoense","bahia",3,0
+"157",1,17,1,2,10,"flamengo","atlético-pr",0,3
+"158",14,9,3,1,26,"criciúma","atlético-mg",3,0
+"159",16,2,1,0,10,"sport","botafogo",3,0
+"160",3,12,2,1,10,"corinthians","internacional",3,0
+"161",8,6,2,0,10,"santos","palmeiras",3,0
+"162",15,20,1,0,26,"goiás","figueirense",3,0
+"163",18,20,0,2,10,"coritiba","figueirense",0,3
+"164",10,13,3,1,10,"cruzeiro","vitória",3,0
+"165",4,7,0,2,10,"bahia","são paulo",0,3
+"166",2,18,1,0,11,"botafogo","coritiba",3,0
+"167",5,8,1,0,11,"fluminense","santos",3,0
+"168",11,15,0,0,10,"grêmio","goiás",1,1
+"169",7,19,0,1,11,"são paulo","chapecoense",0,3
+"170",14,5,3,2,10,"criciúma","fluminense",3,0
+"171",6,10,1,2,11,"palmeiras","cruzeiro",0,3
+"172",19,9,1,1,10,"chapecoense","atlético-mg",1,1
+"173",17,14,2,0,11,"atlético-pr","criciúma",3,0
+"174",9,4,1,1,11,"atlético-mg","bahia",1,1
+"175",13,3,0,0,11,"vitória","corinthians",1,1
+"176",12,1,4,0,11,"internacional","flamengo",3,0
+"177",20,11,0,1,11,"figueirense","grêmio",0,3
+"178",15,16,0,0,11,"goiás","sport",1,1
+"179",1,2,1,0,12,"flamengo","botafogo",3,0
+"180",16,9,2,1,12,"sport","atlético-mg",3,0
+"181",3,6,2,0,12,"corinthians","palmeiras",3,0
+"182",8,19,3,0,12,"santos","chapecoense",3,0
+"183",13,5,3,1,22,"vitória","fluminense",3,0
+"184",17,5,0,3,12,"atlético-pr","fluminense",0,3
+"185",10,20,5,0,12,"cruzeiro","figueirense",3,0
+"186",4,12,0,1,12,"bahia","internacional",0,3
+"187",11,18,2,3,12,"grêmio","coritiba",0,3
+"188",14,13,1,3,12,"criciúma","vitória",0,3
+"189",15,7,2,1,12,"goiás","são paulo",3,0
+"190",2,10,1,1,13,"botafogo","cruzeiro",1,1
+"191",2,6,0,1,27,"botafogo","palmeiras",0,3
+"192",5,15,2,0,13,"fluminense","goiás",3,0
+"193",7,14,1,1,13,"são paulo","criciúma",1,1
+"194",5,9,0,0,27,"fluminense","atlético-mg",1,1
+"195",7,17,1,0,27,"são paulo","atlético-pr",3,0
+"196",6,4,1,1,13,"palmeiras","bahia",1,1
+"197",18,3,0,0,13,"coritiba","corinthians",1,1
+"198",9,17,3,1,13,"atlético-mg","atlético-pr",3,0
+"199",8,4,1,0,27,"santos","bahia",3,0
+"200",13,11,2,1,13,"vitória","grêmio",3,0
+"201",12,8,1,0,13,"internacional","santos",3,0
+"202",18,14,1,0,27,"coritiba","criciúma",3,0
+"203",20,16,3,0,13,"figueirense","sport",3,0
+"204",19,1,1,0,13,"chapecoense","flamengo",3,0
+"205",10,3,0,1,27,"cruzeiro","corinthians",0,3
+"206",13,15,2,2,27,"vitória","goiás",1,1
+"207",11,16,2,0,27,"grêmio","sport",3,0
+"208",1,16,1,0,14,"flamengo","sport",3,0
+"209",5,18,1,1,14,"fluminense","coritiba",1,1
+"210",20,1,1,2,27,"figueirense","flamengo",0,3
+"211",7,13,3,1,14,"são paulo","vitória",3,0
+"212",8,3,0,1,14,"santos","corinthians",0,3
+"213",19,12,5,0,27,"chapecoense","internacional",3,0
+"214",17,2,2,0,14,"atlético-pr","botafogo",3,0
+"215",9,6,2,1,14,"atlético-mg","palmeiras",3,0
+"216",4,15,1,0,14,"bahia","goiás",3,0
+"217",12,11,2,0,14,"internacional","grêmio",3,0
+"218",14,10,0,0,14,"criciúma","cruzeiro",1,1
+"219",19,20,0,1,14,"chapecoense","figueirense",0,3
+"220",1,10,3,0,28,"flamengo","cruzeiro",3,0
+"221",16,13,1,2,28,"sport","vitória",0,3
+"222",2,5,2,0,15,"botafogo","fluminense",3,0
+"223",3,2,1,1,9,"corinthians","botafogo",1,1
+"224",16,17,1,1,15,"sport","atlético-pr",1,1
+"225",3,4,1,1,15,"corinthians","bahia",1,1
+"226",6,7,1,2,15,"palmeiras","são paulo",0,3
+"227",6,11,2,1,28,"palmeiras","grêmio",3,0
+"228",18,1,0,1,15,"coritiba","flamengo",0,3
+"229",17,20,3,0,28,"atlético-pr","figueirense",3,0
+"230",10,8,3,0,15,"cruzeiro","santos",3,0
+"231",13,19,0,0,15,"vitória","chapecoense",1,1
+"232",9,7,1,0,28,"atlético-mg","são paulo",3,0
+"233",11,14,2,0,15,"grêmio","criciúma",3,0
+"234",20,9,2,2,15,"figueirense","atlético-mg",1,1
+"235",4,19,0,1,28,"bahia","chapecoense",0,3
+"236",15,12,0,1,15,"goiás","internacional",0,3
+"237",12,5,2,1,28,"internacional","fluminense",3,0
+"238",14,8,3,0,28,"criciúma","santos",3,0
+"239",15,18,3,0,28,"goiás","coritiba",3,0
+"240",1,9,2,1,16,"flamengo","atlético-mg",3,0
+"241",16,6,2,1,16,"sport","palmeiras",3,0
+"242",3,15,5,2,16,"corinthians","goiás",3,0
+"243",8,17,2,0,16,"santos","atlético-pr",3,0
+"244",18,13,2,0,16,"coritiba","vitória",3,0
+"245",10,11,1,0,16,"cruzeiro","grêmio",3,0
+"246",4,14,0,0,16,"bahia","criciúma",1,1
+"247",12,7,0,1,16,"internacional","são paulo",0,3
+"248",20,2,1,0,16,"figueirense","botafogo",3,0
+"249",19,5,1,0,16,"chapecoense","fluminense",3,0
+"250",20,3,1,0,24,"figueirense","corinthians",3,0
+"251",2,19,1,0,17,"botafogo","chapecoense",3,0
+"252",5,16,4,0,17,"fluminense","sport",3,0
+"253",7,8,2,1,17,"são paulo","santos",3,0
+"254",6,18,1,0,17,"palmeiras","coritiba",3,0
+"255",17,4,0,0,17,"atlético-pr","bahia",1,1
+"256",9,12,1,0,17,"atlético-mg","internacional",3,0
+"257",13,20,0,1,17,"vitória","figueirense",0,3
+"258",11,3,2,1,17,"grêmio","corinthians",3,0
+"259",14,1,0,2,17,"criciúma","flamengo",0,3
+"260",15,10,0,1,17,"goiás","cruzeiro",0,3
+"261",2,1,2,1,31,"botafogo","flamengo",3,0
+"262",2,8,1,0,18,"botafogo","santos",3,0
+"263",16,14,2,0,18,"sport","criciúma",3,0
+"264",3,5,1,1,18,"corinthians","fluminense",1,1
+"265",6,12,0,1,18,"palmeiras","internacional",0,3
+"266",5,17,2,1,31,"fluminense","atlético-pr",3,0
+"267",2,9,0,0,38,"botafogo","atlético-mg",1,1
+"268",18,9,0,0,18,"coritiba","atlético-mg",1,1
+"269",10,19,4,2,18,"cruzeiro","chapecoense",3,0
+"270",13,1,1,2,18,"vitória","flamengo",0,3
+"271",7,15,3,0,31,"são paulo","goiás",3,0
+"272",6,3,1,1,31,"palmeiras","corinthians",1,1
+"273",16,7,1,0,38,"sport","são paulo",3,0
+"274",3,14,2,1,38,"corinthians","criciúma",3,0
+"275",6,17,1,1,38,"palmeiras","atlético-pr",1,1
+"276",18,11,1,1,31,"coritiba","grêmio",1,1
+"277",18,4,3,2,38,"coritiba","bahia",3,0
+"278",10,5,2,1,38,"cruzeiro","fluminense",3,0
+"279",11,4,1,0,18,"grêmio","bahia",3,0
+"280",13,8,0,1,38,"vitória","santos",0,3
+"281",20,7,1,1,18,"figueirense","são paulo",1,1
+"282",9,16,3,2,31,"atlético-mg","sport",3,0
+"283",15,17,3,1,18,"goiás","atlético-pr",3,0
+"284",11,1,1,1,38,"grêmio","flamengo",1,1
+"285",13,14,3,1,31,"vitória","criciúma",3,0
+"286",20,12,1,2,38,"figueirense","internacional",0,3
+"287",1,11,0,1,19,"flamengo","grêmio",0,3
+"288",12,4,2,0,31,"internacional","bahia",3,0
+"289",15,19,4,2,38,"goiás","chapecoense",3,0
+"290",5,10,3,3,19,"fluminense","cruzeiro",1,1
+"291",20,10,1,1,31,"figueirense","cruzeiro",1,1
+"292",1,13,4,0,37,"flamengo","vitória",3,0
+"293",7,16,2,0,19,"são paulo","sport",3,0
+"294",8,13,3,1,19,"santos","vitória",3,0
+"295",17,6,1,1,19,"atlético-pr","palmeiras",1,1
+"296",5,3,5,2,37,"fluminense","corinthians",3,0
+"297",9,2,1,0,19,"atlético-mg","botafogo",3,0
+"298",4,18,0,0,19,"bahia","coritiba",1,1
+"299",19,8,1,1,31,"chapecoense","santos",1,1
+"300",12,20,2,3,19,"internacional","figueirense",0,3
+"301",7,20,1,1,37,"são paulo","figueirense",1,1
+"302",14,3,0,0,19,"criciúma","corinthians",1,1
+"303",8,2,2,0,37,"santos","botafogo",3,0
+"304",19,15,0,0,19,"chapecoense","goiás",1,1
+"305",17,15,1,0,37,"atlético-pr","goiás",3,0
+"306",1,19,3,0,32,"flamengo","chapecoense",3,0
+"307",9,18,1,2,37,"atlético-mg","coritiba",0,3
+"308",4,11,1,0,37,"bahia","grêmio",3,0
+"309",2,20,0,1,35,"botafogo","figueirense",0,3
+"310",16,20,1,0,32,"sport","figueirense",3,0
+"311",1,18,3,2,34,"flamengo","coritiba",3,0
+"312",12,6,3,1,37,"internacional","palmeiras",3,0
+"313",5,2,1,0,34,"fluminense","botafogo",3,0
+"314",5,19,1,4,35,"fluminense","chapecoense",0,3
+"315",3,18,2,2,32,"corinthians","coritiba",1,1
+"316",7,6,2,0,34,"são paulo","palmeiras",3,0
+"317",14,16,2,2,37,"criciúma","sport",1,1
+"318",8,10,0,1,34,"santos","cruzeiro",0,3
+"319",7,12,1,1,35,"são paulo","internacional",1,1
+"320",19,10,1,1,37,"chapecoense","cruzeiro",1,1
+"321",17,16,0,1,34,"atlético-pr","sport",0,3
+"322",9,20,1,1,34,"atlético-mg","figueirense",1,1
+"323",6,16,0,2,35,"palmeiras","sport",0,3
+"324",4,3,1,2,34,"bahia","corinthians",0,3
+"325",8,12,1,2,32,"santos","internacional",0,3
+"326",12,15,1,0,34,"internacional","goiás",3,0
+"327",17,9,1,0,32,"atlético-pr","atlético-mg",3,0
+"328",17,8,1,1,35,"atlético-pr","santos",1,1
+"329",14,11,0,3,34,"criciúma","grêmio",0,3
+"330",19,13,0,1,34,"chapecoense","vitória",0,3
+"331",10,2,2,1,32,"cruzeiro","botafogo",3,0
+"332",9,1,4,0,35,"atlético-mg","flamengo",3,0
+"333",4,6,0,1,32,"bahia","palmeiras",0,3
+"334",13,18,1,1,35,"vitória","coritiba",1,1
+"335",2,17,0,2,33,"botafogo","atlético-pr",0,3
+"336",11,13,1,0,32,"grêmio","vitória",3,0
+"337",16,1,2,2,33,"sport","flamengo",1,1
+"338",3,8,1,0,33,"corinthians","santos",3,0
+"339",6,9,0,2,33,"palmeiras","atlético-mg",0,3
+"340",14,7,1,2,32,"criciúma","são paulo",0,3
+"341",18,5,1,0,33,"coritiba","fluminense",3,0
+"342",11,10,1,2,35,"grêmio","cruzeiro",0,3
+"343",15,5,0,2,32,"goiás","fluminense",0,3
+"344",10,14,3,1,33,"cruzeiro","criciúma",3,0
+"345",14,4,0,1,35,"criciúma","bahia",0,3
+"346",15,3,0,1,35,"goiás","corinthians",0,3
+"347",13,7,1,2,33,"vitória","são paulo",0,3
+"348",11,12,4,1,33,"grêmio","internacional",3,0
+"349",20,19,1,0,33,"figueirense","chapecoense",3,0
+"350",15,4,3,0,33,"goiás","bahia",3,0
+"351",1,14,1,1,36,"flamengo","criciúma",1,1
+"352",1,12,2,0,30,"flamengo","internacional",3,0
+"353",16,5,2,2,36,"sport","fluminense",1,1
+"354",16,15,0,1,30,"sport","goiás",0,3
+"355",3,13,2,1,30,"corinthians","vitória",3,0
+"356",8,5,0,1,30,"santos","fluminense",0,3
+"357",3,11,1,0,36,"corinthians","grêmio",3,0
+"358",18,2,2,0,30,"coritiba","botafogo",3,0
+"359",10,6,1,1,30,"cruzeiro","palmeiras",1,1
+"360",8,7,0,1,36,"santos","são paulo",0,3
+"361",4,9,1,1,30,"bahia","atlético-mg",1,1
+"362",11,20,1,0,30,"grêmio","figueirense",3,0
+"363",14,17,0,1,30,"criciúma","atlético-pr",0,3
+"364",18,6,2,0,36,"coritiba","palmeiras",3,0
+"365",19,7,0,0,30,"chapecoense","são paulo",1,1
+"366",10,15,2,1,36,"cruzeiro","goiás",3,0
+"367",4,17,1,2,36,"bahia","atlético-pr",0,3
+"368",12,9,2,1,36,"internacional","atlético-mg",3,0
+"369",20,13,2,0,36,"figueirense","vitória",3,0
+"370",19,2,2,0,36,"chapecoense","botafogo",3,0
+"371",2,16,1,1,29,"botafogo","sport",1,1
+"372",5,14,4,2,29,"fluminense","criciúma",3,0
+"373",7,4,2,1,29,"são paulo","bahia",3,0
+"374",6,8,1,3,29,"palmeiras","santos",0,3
+"375",17,1,2,1,29,"atlético-pr","flamengo",3,0
+"376",9,19,1,0,29,"atlético-mg","chapecoense",3,0
+"377",13,10,0,1,29,"vitória","cruzeiro",0,3
+"378",12,3,1,2,29,"internacional","corinthians",0,3
+"379",20,18,4,0,29,"figueirense","coritiba",3,0
+"380",15,11,0,0,29,"goiás","grêmio",1,1
