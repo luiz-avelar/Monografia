@@ -2,11 +2,13 @@ library(tidyverse)
 library(rstan)
 library(glue)
 library(shinystan)
+library("loo")
+
 
 data <- read.csv("data/2014_partidas_tidy.csv", header = TRUE)
 data <- data |> arrange(round, home_team_id, away_team_id)
 
-prg <- stan_model(file = "models/stan/poisson-misto-zero-inflado.stan")
+prg <- stan_model(file = "models/stan/binomial-negativa-misto.stan")
 
 iter <- 4000
 G <- 380
@@ -26,33 +28,7 @@ dados_list <- list(
 fit_sim <- sampling(prg, data = dados_list, chains = 1, iter = iter, cores = 1, refresh = 100)
 
 list_of_results <- extract(fit_sim, pars = c("y1_tilde", "y2_tilde"))
-list_of_results_original <- extract(fit_sim, pars = c("y1_tilde", "y2_tilde"))
 sample_size <- dim(list_of_results$y1_tilde)[1]
-
-# Turn scores in to points
-
-for (i in 1:G) {
-  for (j in 1:sample_size) {
-    
-    home_team_score <- list_of_results$y1_tilde[j, i]
-    away_team_score <- list_of_results$y2_tilde[j, i]
-    
-    if (home_team_score > away_team_score) {
-      home_team_points <- 3
-      away_team_points <- 0
-    } else if (home_team_score < away_team_score) {
-      home_team_points <- 0
-      away_team_points <- 3
-    } else {
-      home_team_points <- 1
-      away_team_points <- 1
-    }
-# Susbstituir em uma variavel auxiliar
-        
-    list_of_results$y1_tilde[j, i] <- home_team_points
-    list_of_results$y2_tilde[j, i] <- away_team_points
-  }
-}
 
 home_team_results <- as_tibble(t(list_of_results$y1_tilde))
 away_team_results <- as_tibble(t(list_of_results$y2_tilde))
@@ -101,7 +77,7 @@ predict_data <- cbind(predict_data, quantis) |>
   select(
     round,
     team,
-    team_points,
+    team_score,
     "2.5%",
     "50%",
     "97.5%"
@@ -112,22 +88,18 @@ predict_data <- cbind(predict_data, quantis) |>
     upper_bound = "97.5%"
   )
 
-ggplot(data = predict_data, mapping = aes(x = round)) + 
-  geom_line(mapping = aes(y = team_points), color = "black") +
-  geom_line(mapping = aes(y = median), color = "blue") + 
-  geom_ribbon(mapping = aes(ymin = lower_bound, ymax = upper_bound), linetype=2, alpha=0.1) + 
-  facet_wrap(~ team)
-
 # Erro quadratico medio
-## Para a pontuacao
+## Para o numero de gols
 
-RSME_pontuacao <- predict_data |>
+EQM_gols <- predict_data |>
   select(
-    team_points,
+    team_score,
     median,
   ) |>
   summarise(
-    RSME = sqrt(mean((team_points - median) ^ 2))
+    EQM = mean((team_score - median) ^ 2)
   )
 
-## Para o numero de gols
+# LOO
+
+loo1 <- loo(fit_sim, save_psis = TRUE)

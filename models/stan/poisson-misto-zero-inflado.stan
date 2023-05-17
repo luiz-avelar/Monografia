@@ -91,11 +91,32 @@ model {
 generated quantities {
   vector[G] y1_tilde;
   vector[G] y2_tilde;
+  vector[G] log_lik_home;
+  vector[G] log_lik_away;
   vector[G] log_lik;
   for (g in 1:G) {
     y1_tilde[g] = poisson_log_rng(home + att[h[g]] + def[a[g]]);
     y2_tilde[g] = poisson_log_rng(att[a[g]] + def[h[g]]);
-    log_lik[g]  = poisson_log_lpmf(y1[g] | home + att[h[g]] + def[a[g]]) + 
-      poisson_log_lpmf(y2[g] | att[a[g]] + def[h[g]]);
+
+    if (y1[g] == 0) {
+      log_lik_home[g] = log_sum_exp(log(p_zero_home), log(1 - p_zero_home) + poisson_log_lpmf(y1[g] | home + att[h[g]] + def[a[g]]));
+      
+    } else {
+      
+     log_lik_home[g] = log(1 - p_zero_home) + poisson_log_lpmf(y1[g] | home + att[h[g]] + def[a[g]]);
+    
+    }
+    
+    if (y2[g] == 0) {
+      log_lik_away[g] = log_sum_exp(log(p_zero_away), log(1 - p_zero_away) + poisson_log_lpmf(y2[g] | att[a[g]] + def[h[g]]));
+      
+    } else {
+      
+     log_lik_away[g] = log(1 - p_zero_away) + poisson_log_lpmf(y2[g] | att[a[g]] + def[h[g]]);
+    
+    }
+    
+    log_lik[g] = log_lik_home[g] + log_lik_away[g];
   } 
 }
+
