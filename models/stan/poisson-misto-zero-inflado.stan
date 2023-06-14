@@ -80,13 +80,13 @@ model {
   // Efeito aleatoria eh particular a algumas observacoes
   
   // Priori dos parametros de interesse
-  home ~ normal(0, 2);
-  mu_att ~ normal(0, 2);
-  mu_def ~ normal(0, 2);
+  home ~ normal(0, 5);
+  mu_att ~ normal(0, 5);
+  mu_def ~ normal(0, 5);
   sigma_att ~ cauchy(0, 2.5);
   sigma_def ~ cauchy(0, 2.5);
-  // p_zero_home ~ beta(2, 5);
-  // p_zero_away ~ beta(2, 5);
+  p_zero_home ~ beta(0.1, 0.4);
+  p_zero_away ~ beta(0.1, 0.4);
 }
 generated quantities {
   vector[G] y1_tilde;

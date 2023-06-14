@@ -144,4 +144,28 @@ plot(model_cat_parameters)
 summary(model_cat_parameters)
 acf(model_cat_parameters)
 ```
+```{r}
+library(bbsBayes)
+r_hat(jags.m = NULL, parameter_list = NULL, threshold = NULL)
+```
+```{r}
+library()
+n_eff_r_hat <- MCMCsummary(
+   model_cat_parameters,
+   params = "all",
+   excl = NULL,
+   ISB = TRUE,
+   exact = TRUE,
+   probs = c(0.025, 0.5, 0.975),
+   hpd_prob = 0.95,
+   HPD = FALSE,
+   pg0 = FALSE,
+   digits = NULL,
+   round = NULL,
+   Rhat = TRUE,
+   n.eff = TRUE,
+   func = NULL,
+   func_name = NULL
+)
+```
 
