@@ -1,32 +1,53 @@
+---
+title: "Resultados modelo 2"
+output: html_notebook
+---
+
+```{r}
 library(tidyverse)
+library(kableExtra)
 library(rstan)
-library(glue)
-library(shinystan)
+library(loo)
+```
 
-data <- read.csv("data/2014_partidas_tidy.csv", header = TRUE)
-data <- data |> arrange(round, home_team_id, away_team_id)
+Importação dos dados 
+```{r}
+dados <- read.csv("../data/dataset_2022.csv", header = TRUE, encoding = 'UTF-8')
+```
 
-prg <- stan_model(file = "models/stan/poisson-misto-zero-inflado.stan")
+Importação dos modelos
+```{r}
+modelo2 <- stan_model(file = "../models/stan/binomial-negativa-misto.stan")
+```
 
-iter <- 4000
+Parametros do modelo
+```{r}
+iter <- 5000
 G <- 380
 T <- 20
+bn_size <- 5.756
 
 dados_list <- list(
   G  = G,
   T  = T,
-  h  = data$home_team_id,
-  a  = data$away_team_id,
-  y1 = data$home_team_score,
-  y2 = data$away_team_score
+  h  = dados$home_team_id,
+  a  = dados$away_team_id,
+  y1 = dados$home_team_score,
+  y2 = dados$away_team_score
 )
+```
 
-fit_sim <- sampling(prg, data = dados_list, chains = 1, iter = iter, cores = 1, refresh = 100)
+Ajuste do modelo
+```{r}
+fit_sim_modelo2 <- sampling(modelo2, data = dados_list, chains = 1, iter = iter, cores = 1, refresh = 100)
+```
 
-list_of_results <- extract(fit_sim, pars = c("y1_tilde", "y2_tilde"))
-list_of_results_original <- extract(fit_sim, pars = c("y1_tilde", "y2_tilde"))
+```{r}
+list_of_results <- extract(fit_sim_modelo2, pars = c("y1_tilde", "y2_tilde"))
 sample_size <- dim(list_of_results$y1_tilde)[1]
+```
 
+```{r}
 # Turn scores in to points
 
 for (i in 1:G) {
@@ -55,7 +76,7 @@ for (i in 1:G) {
 home_team_results <- as_tibble(t(list_of_results$y1_tilde))
 away_team_results <- as_tibble(t(list_of_results$y2_tilde))
 
-data_by_team <- data |> 
+data_by_team <- dados |> 
   pivot_longer(
     cols = ends_with("name")
   ) |>
@@ -110,22 +131,47 @@ predict_data <- cbind(predict_data, quantis) |>
     upper_bound = "97.5%"
   )
 
+```
+
+```{r}
 ggplot(data = predict_data, mapping = aes(x = round)) + 
-  geom_line(mapping = aes(y = team_points), color = "black") +
-  geom_line(mapping = aes(y = median), color = "blue") + 
+  # geom_line(mapping = aes(y = team_points), color = "black") +
+  # geom_line(mapping = aes(y = median), color = "blue") + 
+  geom_line(aes(y= team_points, colour="Observado")) +
+  geom_line(aes(y= median, colour="Modelo 2")) +
+  scale_color_manual(name = "", values = c("Observado" = "darkblue", "Modelo 2" = "red")) +
   geom_ribbon(mapping = aes(ymin = lower_bound, ymax = upper_bound), linetype=2, alpha=0.1) + 
-  facet_wrap(~ team)
+  facet_wrap(~ team) +
+  xlab("Rodada") +
+  ylab("Pontuação")
+  
+```
 
-# Erro quadratico medio
-## Para a pontuacao
-
-RSME_pontuacao <- predict_data |>
-  select(
-    team_points,
-    median,
+Erro quadrático médio
+```{r}
+# Resultado: 54.7
+predict_data |>
+  filter(
+    round == 38
   ) |>
   summarise(
-    RSME = sqrt(mean((team_points - median) ^ 2))
+    RMSE = mean((team_points - median)^2)
   )
+```
 
-## Para o numero de gols
+Validação cruzada
+```{r}
+loo(fit_sim_modelo2)
+```
+
+Computed from 2500 by 380 log-likelihood matrix
+
+         Estimate   SE
+elpd_loo  -1027.4 15.6
+p_loo        21.1  1.2
+looic      2054.8 31.1
+------
+Monte Carlo SE of elpd_loo is 0.1.
+
+All Pareto k estimates are good (k < 0.5).
+See help('pareto-k-diagnostic') for details.

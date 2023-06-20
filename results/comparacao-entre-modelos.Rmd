@@ -1,0 +1,26 @@
+---
+title: "Comparacao entre modelos"
+output: html_document
+date: "2023-06-20"
+---
+Importacao dos pacotes
+```{r}
+library(tidyverse)
+library(kableExtra)
+```
+
+Erro quadrático médio
+```{r}
+erro_quadratico_medio <- tibble(
+  Modelo = c("Modelo 1", "Modelo 2", "Modelo 3"),
+  EQM = c(54.25, 54.7, 52.55),
+)
+```
+
+
+```{r}
+erro_quadratico_medio |>
+  kbl() |>
+  kable_classic(full_width = F, html_font = "Arial")
+```
+

@@ -12,8 +12,8 @@ parameters {
   real mu_def;
   real<lower=0> sigma_att;
   real<lower=0> sigma_def;
-  vector[T] att_raw;
-  vector[T] def_raw;
+  vector[T - 1] att_raw;
+  vector[T - 1] def_raw;
 }
 transformed parameters {
   vector[T] att;
@@ -23,13 +23,14 @@ transformed parameters {
     def[t] = def_raw[t];
   }
   att[T] = 0;
-  def[T] = 0; }
+  def[T] = 0; 
+}
 model {
   for (g in 1:G) {
     y1[g] ~ poisson_log(home + att[h[g]] + def[a[g]]);
     y2[g] ~ poisson_log(att[a[g]] + def[h[g]]);
   }
-  for (t in 1:T) {
+  for (t in 1:(T - 1)) {
     att_raw[t] ~ normal(mu_att, sigma_att);
     def_raw[t] ~ normal(mu_def, sigma_def);
   }
