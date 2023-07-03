@@ -1,0 +1,80 @@
+---
+title: "Dataset 2022"
+output: html_document
+date: "2023-06-20"
+---
+
+```{r}
+library(tidyverse)
+library(flextable)
+```
+
+Importação dos dados 
+```{r}
+dados <- read.csv("../data/campeonato-brasileiro-full.csv", header = TRUE, encoding = 'UTF-8')
+```
+
+Seleção das colunas de interesse, renomeação, filtro dos dados e cálculo da pontuação
+```{r}
+dados <- dados |>
+  mutate(
+    round = rodata,
+    home_team_name = mandante,
+    away_team_name = visitante,
+    home_team_score = mandante_Placar,
+    away_team_score = visitante_Placar,
+    data = str_replace_all(data, "/", "-"),
+    date = dmy(data)
+  ) |>
+  select(
+    ID,
+    round,
+    home_team_name,
+    away_team_name,
+    home_team_score,
+    away_team_score,
+    date,
+  ) |>
+  filter(
+    date >= as_date("2020-01-01") & date < as_date("2021-05-29")
+  ) |>
+  mutate(
+    ID = row_number(),
+    home_team_id = dense_rank(home_team_name),
+    away_team_id = dense_rank(away_team_name)
+  ) |>
+  mutate(
+    home_team_points = case_when(
+      home_team_score >  away_team_score ~ 3,
+      home_team_score == away_team_score ~ 1,
+      home_team_score <  away_team_score ~ 0
+    ),
+    away_team_points = case_when(
+      away_team_score >  home_team_score ~ 3,
+      away_team_score == home_team_score ~ 1,
+      away_team_score <  home_team_score ~ 0
+    )
+  ) |>
+  arrange(round, home_team_id, away_team_id)
+```
+
+Tabela 1: ilustração do conjunto de dados
+```{r}
+dados |>
+  select(
+    round,
+    home_team_name,
+    away_team_name,
+    home_team_score,
+    away_team_score,
+    home_team_id,
+    away_team_id
+  ) |>
+  head(5) |>
+  flextable()
+```
+
+Reescrita do conjunto de dados ajeitado
+```{r}
+write.csv(dados, "../data/dataset_2020.csv")
+```

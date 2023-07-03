@@ -1,0 +1,252 @@
+---
+title: "Comparacao modelo 1"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(flextable)
+library(rstan)
+library(rjags)
+library(MCMCvis)
+```
+
+Importação dos dados 
+```{r}
+dados <- read.csv("../../data/dataset_2022.csv", header = TRUE, encoding = 'UTF-8')
+```
+
+Importação dos modelos
+```{r}
+modelo1_stan <- stan_model(file = "../../models/stan_compare/poisson-misto.stan")
+```
+
+Parametros do modelo
+```{r}
+iter <- 5000
+G <- 380
+T <- 20
+
+dados_list <- list(
+  G  = G,
+  T  = T,
+  h  = dados$home_team_id,
+  a  = dados$away_team_id,
+  y1 = dados$home_team_score,
+  y2 = dados$away_team_score
+)
+fit_sim_modelo_stan <- sampling(modelo1_stan, data = dados_list, chains = 4, iter = iter, cores = 1)
+```
+
+```{r}
+cat("
+model
+{   
+  for(g in 1:G) {  
+    y1[g] ~  dpois(lambda1[g])
+    lambda1[g] = exp(home + att[h[g]] + def[a[g]]) # h e a são passados nos dados
+    
+    y2[g] ~  dpois(lambda2[g])
+    lambda2[g] = exp(att[a[g]] + def[h[g]])
+  }
+  
+  for(t in 1:(T-1)) {
+    att_raw[t] ~ dnorm(mu_att, tau_att)  ## tau = 1/sigma2
+    def_raw[t] ~ dnorm(mu_def, tau_def)
+    att[t] = att_raw[t]
+    def[t] = def_raw[t]
+  }
+  
+  att[T] = 0
+  def[T] = 0
+  
+  tau_eff = 1/sigma_sq_eff ## sigma_sq_eff passado nos dados
+   
+  mu_att ~ dnorm(0, tau_eff)
+  mu_def ~ dnorm(0, tau_eff)
+  
+  home ~ dnorm(0, tau_eff)
+  
+  tau_att ~ dgamma(a_att, b_att) ## a_att e b_att vem nos dados
+  tau_def ~ dgamma(a_def, b_def)
+  
+  sigma_att = 1/sqrt(tau_att)
+  sigma_def = 1/sqrt(tau_def)
+  
+}
+", file={model <- tempfile()})
+```
+
+```{r}
+library(rjags)
+# https://math.ntnu.edu.tw/~rtsai/104/bayes/jags/jags-OLR.pdf
+
+load.module("bugs")
+#load.module("mix")
+
+G = 380
+T = 20
+sigma_sq_eff = 100
+
+#
+a_att <- 0.1
+b_att <- 0.1
+
+#
+a_def <- 0.1
+b_def <- 0.1
+
+## Dados
+data <- read.csv("../../data/dataset_2022.csv", header = TRUE, encoding = 'UTF-8')
+
+n_sim <- 5000
+jags.m <- jags.model(model, quiet = TRUE,
+                     data = list(
+                       G = G,
+                       a_att= a_att,
+                       a_def = a_def,
+                       b_att = b_att,
+                       b_def = b_def,
+                       sigma_sq_eff = sigma_sq_eff,
+                       T = T,
+                       h  = data$home_team_id,
+                       a  = data$away_team_id,
+                       y1 = data$home_team_score,
+                       y2 = data$away_team_score
+                       
+                     ), 
+                    n.chains = 4, n.adapt = 1000)
+```
+
+```{r}
+model_cat_parameters <- coda.samples(jags.m, 
+                             c("home", "mu_att", "mu_def", "sigma_att", "sigma_def", "att", "def"),
+                             n.iter = n_sim, n.burnin = floor(n_sim/2), quiet = T)
+```
+
+
+```{r}
+params = c(
+  "home", 
+  "mu_att",
+  "mu_def",
+  "sigma_att",
+  "sigma_def",
+  "att",
+  "def"
+)
+
+parametros_stan <- MCMCsummary(
+   fit_sim_modelo_stan,
+   params = params,
+   probs = c(0.025, 0.5, 0.975),
+   Rhat = TRUE,
+   n.eff = TRUE
+) |>
+  select(
+    Rhat,
+    n.eff
+  ) 
+
+parametros_jags <- MCMCsummary(
+   model_cat_parameters,
+   params = params,
+   probs = c(0.025, 0.5, 0.975),
+   Rhat = TRUE,
+   n.eff = TRUE
+) |>
+  select(
+    Rhat,
+    n.eff
+  ) |>
+  rename(
+    "Rhat " = Rhat,
+    "n.eff " = n.eff
+  )
+
+
+Parametros <- c(
+        "home",
+        "mu_att",
+        "mu_def",
+        "sigma_att",
+        "sigma_def",
+        "America-MG - att",
+        "Athletico-PR - att",
+        "Atletico-GO - att",
+        "Atletico-MG - att",
+        "Avai - att",
+        "Botafogo-RJ - att",
+        "Bragantino - att",
+        "Ceara - att",
+        "Corinthians - att",
+        "Coritiba - att",
+        "Cuiaba - att",
+        "Flamengo - att",
+        "Fluminense - att",
+        "Fortaleza - att",
+        "Goias - att",
+        "Internacional - att",
+        "Juventude - att",
+        "Palmeiras - att",
+        "Santos - att",
+        "Sao Paulo - att",
+        "America-MG - def",
+        "Athletico-PR - def",
+        "Atletico-GO - def",
+        "Atletico-MG - def",
+        "Avai - def",
+        "Botafogo-RJ - def",
+        "Bragantino - def",
+        "Ceara - def",
+        "Corinthians - def",
+        "Coritiba - def",
+        "Cuiaba - def",
+        "Flamengo - def",
+        "Fluminense - def",
+        "Fortaleza - def",
+        "Goias - def",
+        "Internacional - def",
+        "Juventude - def",
+        "Palmeiras - def",
+        "Santos - def",
+        "Sao Paulo - def"
+    ) 
+
+parametros <- cbind(Parametros, parametros_stan, parametros_jags)
+
+parametros <- parametros %>%
+ replace(is.na(.), 0) |>
+  head(5)
+```
+
+```{r}
+set_flextable_defaults(
+  font.size = 12, theme_fun = theme_vanilla,
+  padding = 6,
+  background.color = "#EFEFEF"
+)
+
+ft <- flextable(parametros)
+ft <- add_header_row(
+  ft,
+  colwidths = c(1, 2, 2),
+  values = c("", "Stan", "Jags")
+)
+# ft <- merge_at(ft, i = 1:6, j = 1)
+ft <- align(ft, i = 1, part = "header", align = "center")
+ft <- colformat_double(
+  x = ft,
+  big.mark = "", 
+  decimal.mark = ",",
+  digits = 2
+)
+ft <- colformat_int(
+  x = ft,
+  big.mark = ""
+)
+
+ft 
+
+```
+

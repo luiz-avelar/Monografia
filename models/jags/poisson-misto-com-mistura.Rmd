@@ -1,0 +1,137 @@
+---
+title: "Untitled"
+output: html_document
+date: "2023-06-07"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r cars}
+cat("
+model
+{   
+  for(g in 1:G) {  
+    y1[g] ~  dpois(lambda1[g])
+    lambda1[g] = exp(home + att[h[g]] + def[a[g]]) # h e a são passados nos dados
+    
+    y2[g] ~  dpois(lambda2[g])
+    lambda2[g] = exp(att[a[g]] + def[h[g]])
+  }
+  
+  for(t in 1:(T-1)) {
+  
+    for (i in 1:3) {
+      
+      att_raw[t] ~ dnorm(mu_att[zeta_att[i]], tau_att[zeta_att[i]])
+      def_raw[t] ~ dnorm(mu_def[zeta_def[i]], tau_def[zeta_def[i]])
+      
+      zeta_att[i] ~ dcat(p_att[])
+      zeta_def[i] ~ dcat(p_def[])
+      
+    }
+    
+    att[t] = att_raw[t]
+    def[t] = def_raw[t]
+  }
+  
+  att[T] = 0
+  def[T] = 0
+  
+  tau_eff = 1/sigma_sq_eff ## sigma_sq_eff passado nos dados
+
+  mu_att1 ~ dnorm(0, tau_eff)T(-3,0) #I() truncado
+  mu_def1 ~ dnorm(0, tau_eff)T( 0,3) #I() truncado
+  
+  mu_att2 = 0
+  mu_def2 = 0
+  
+  mu_att3 ~ dnorm(0, tau_eff)T(-3,0) #I()
+  mu_def3 ~ dnorm(0, tau_eff)T( 0,3) #I()
+  
+  m_att = [mu_att1, mu_att2, mu_att3]
+  m_def = [mu_def1, mu_def2, mu_def3]
+
+  home ~ dnorm(0, tau_eff)
+  
+  tau_att ~ dgamma(a_att, b_att) ## a_att e b_att vem nos dados
+  tau_def ~ dgamma(a_def, b_def)
+  
+  sigma_att = 1/sqrt(tau_att)
+  sigma_def = 1/sqrt(tau_def)
+  
+  p_att ~ ddirich(c(1, 1, 1))
+  p_def ~ ddirich(c(1, 1, 1))
+  
+}
+", file={model <- tempfile()})
+```
+
+
+```{r}
+library(rjags)
+# https://math.ntnu.edu.tw/~rtsai/104/bayes/jags/jags-OLR.pdf
+
+load.module("bugs")
+#load.module("mix")
+
+G = 380
+T = 20
+sigma_sq_eff = 100
+
+#
+a_att <- 1
+b_att <- 1
+
+#
+a_def <- 1
+b_def <- 1
+
+# 
+sigma_sq_eff_size <- 2.5
+
+## Dados
+data <- read.csv("../../data/2014_partidas_tidy.csv", header = TRUE, encoding = 'UTF-8')
+
+n_sim <- 5000
+jags.m <- jags.model(model, quiet = TRUE,
+                     data = list(
+                       G = G,
+                       a_att= a_att,
+                       a_def = a_def,
+                       b_att = b_att,
+                       b_def = b_def,
+                       sigma_sq_eff = sigma_sq_eff,
+                       sigma_sq_eff_size = sigma_sq_eff_size,
+                       T = T,
+                       h  = data$home_team_id,
+                       a  = data$away_team_id,
+                       y1 = data$home_team_score,
+                       y2 = data$away_team_score
+                       
+                     ), 
+                    n.chains = 1, n.adapt = 1000)
+
+model_cat_dp <- coda.samples(jags.m, 
+                             c("y1_tilde", "y2_tilde"),
+                             n.iter = n_sim, n.burnin = floor(n_sim/2), quiet = T)
+```
+
+```{r fig.height=10, fig.width=10}
+summary(model_cat_dp)
+plot(model_cat_dp)
+```
+
+```{r}
+model_cat_parameters <- coda.samples(jags.m, 
+                             c("home", "mu_att", "mu_def", "sigma_att", "sigma_def", "bn_size"),
+                             n.iter = n_sim, n.burnin = floor(n_sim/2), quiet = T)
+```
+
+```{r}
+plot(model_cat_parameters)
+summary(model_cat_parameters)
+```
+
+$$\sigma^{2}$$

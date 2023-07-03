@@ -1,0 +1,287 @@
+---
+title: "Resultados modelo 4"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(rstan)
+library(loo)
+```
+
+Importação dos dados 
+```{r}
+dados <- read.csv("../../data/dataset_2020.csv", header = TRUE, encoding = 'UTF-8')
+```
+
+Importação dos modelos
+```{r}
+modelo4 <- stan_model(file = "../../models/stan/poisson-misto-com-mistura.stan")
+```
+
+Parametros do modelo
+```{r}
+iter <- 5000
+G <- 380
+T <- 20
+C <- 3
+
+dados_list <- list(
+  G  = G,
+  T  = T,
+  C  = C,
+  h  = dados$home_team_id,
+  a  = dados$away_team_id,
+  y1 = dados$home_team_score,
+  y2 = dados$away_team_score
+)
+```
+
+Ajuste do modelo
+```{r}
+fit_sim_modelo4 <- sampling(modelo4, data = dados_list, chains = 1, iter = iter, cores = 1, refresh = 100)
+```
+
+```{r}
+list_of_results <- extract(fit_sim_modelo4, pars = c("y1_tilde", "y2_tilde"))
+sample_size <- dim(list_of_results$y1_tilde)[1]
+```
+
+```{r}
+# Turn scores in to points
+
+for (i in 1:G) {
+  for (j in 1:sample_size) {
+    
+    home_team_score <- list_of_results$y1_tilde[j, i]
+    away_team_score <- list_of_results$y2_tilde[j, i]
+    
+    if (home_team_score > away_team_score) {
+      home_team_points <- 3
+      away_team_points <- 0
+    } else if (home_team_score < away_team_score) {
+      home_team_points <- 0
+      away_team_points <- 3
+    } else {
+      home_team_points <- 1
+      away_team_points <- 1
+    }
+# Susbstituir em uma variavel auxiliar
+        
+    list_of_results$y1_tilde[j, i] <- home_team_points
+    list_of_results$y2_tilde[j, i] <- away_team_points
+  }
+}
+
+home_team_results <- as_tibble(t(list_of_results$y1_tilde))
+away_team_results <- as_tibble(t(list_of_results$y2_tilde))
+
+data_by_team <- dados |> 
+  pivot_longer(
+    cols = ends_with("name")
+  ) |>
+  rename(team = value) 
+
+data_home_team <- data_by_team |>
+  filter(name == "home_team_name") |>
+  select(
+    round,
+    team,
+    starts_with("home_team")
+  ) |>
+  rename_with(~ gsub("home_", "", .x, fixed = TRUE)) |>
+  cbind(home_team_results)
+
+data_away_team <- data_by_team |>
+  filter(name == "away_team_name") |>
+  select(
+    round,
+    team,
+    starts_with("away_team")
+  ) |>
+  rename_with(~ gsub("away_", "", .x, fixed = TRUE)) |>
+  cbind(away_team_results) 
+
+predict_data <- rbind(data_home_team, data_away_team) |>
+  group_by(team) |>
+  mutate(team_points = order_by(round, cumsum(team_points))) |>
+  mutate(across(V1:V2500, ~order_by(round, cumsum(.x)))) |>
+  ungroup()
+
+prep_quantis_data <- predict_data |>
+  select(
+    V1:V2500
+  ) |> as.matrix()
+
+quantis <- apply(prep_quantis_data, MARGIN = 1, FUN = quantile, probs = c(0.025, 0.5, 0.975))
+quantis <- t(quantis)
+
+predict_data <- cbind(predict_data, quantis) |>
+  select(
+    round,
+    team,
+    team_points,
+    "2.5%",
+    "50%",
+    "97.5%"
+  ) |>
+  rename(
+    lower_bound = "2.5%",
+    median      = "50%",
+    upper_bound = "97.5%"
+  )
+
+```
+
+```{r}
+ggplot(data = predict_data, mapping = aes(x = round)) + 
+  # geom_line(mapping = aes(y = team_points), color = "black") +
+  # geom_line(mapping = aes(y = median), color = "blue") + 
+  geom_line(aes(y= team_points, colour="Observado")) +
+  geom_line(aes(y= median, colour="Modelo Poisson Misto com Mistura")) +
+  scale_color_manual(name = "", values = c("Observado" = "darkblue", "Modelo Poisson Misto com Mistura" = "red")) +
+  geom_ribbon(mapping = aes(ymin = lower_bound, ymax = upper_bound), linetype=2, alpha=0.1) + 
+  facet_wrap(~ team) +
+  xlab("Rodada") +
+  ylab("Pontuação")
+```
+
+Erro quadrático médio
+```{r}
+# Resultado: 35.00
+predict_data |>
+  filter(
+    round == 38
+  ) |>
+  summarise(
+    RMSE = mean((team_points - median)^2)
+  )
+```
+
+Viés
+```{r}
+# Resultado: -0.3
+predict_data |>
+  filter(
+    round == 38
+  ) |>
+  summarise(
+    RMSE = mean((team_points - median))
+  )
+```
+
+LOO
+```{r}
+loo(fit_sim_modelo4)
+```
+
+
+Computed from 2500 by 380 log-likelihood matrix
+
+         Estimate   SE
+elpd_loo  -1062.2 17.8
+p_loo        22.7  1.3
+looic      2124.4 35.7
+------
+Monte Carlo SE of elpd_loo is 0.5.s
+
+EQM e Vies de gols
+```{r}
+list_of_goals <- rstan::extract(fit_sim_modelo4, pars = c("y1_tilde", "y2_tilde"))
+goals_home <- as.matrix(list_of_goals$y1_tilde)
+goals_away <- as.matrix(list_of_goals$y2_tilde)
+goals_home_median <- apply(goals_home, MARGIN = 2, FUN = quantile, probs = c(0.5))
+goals_away_median <- apply(goals_away, MARGIN = 2, FUN = quantile, probs = c(0.5))
+```
+
+  RMSE_goals vies_goals
+1  0.9223684     -0.075
+```{r}
+predict_data |>
+  cbind(goals_home_median, goals_away_median) |>
+  summarise(
+    RMSE_goals = mean((home_team_score - goals_home_median)^2 + (away_team_score - goals_away_median)^2) / 2,
+    vies_goals = mean((home_team_score - goals_home_median) + (away_team_score - goals_away_median)) / 2
+  )
+```
+
+```{r}
+times <- dados |> select(home_team_name) |> distinct() |> arrange() 
+
+eff_aleatorios_att <- c(
+  "att[1]",
+  "att[2]",
+  "att[3]",
+  "att[4]",
+  "att[5]",
+  "att[6]",
+  "att[7]",
+  "att[8]",
+  "att[9]",
+  "att[10]",
+  "att[11]",
+  "att[12]",
+  "att[13]",
+  "att[14]",
+  "att[15]",
+  "att[16]",
+  "att[17]",
+  "att[18]",
+  "att[19]",
+  "att[20]"
+)
+
+eff_aleatorios_def <- c(
+  "def[1]",
+  "def[2]",
+  "def[3]",
+  "def[4]",
+  "def[5]",
+  "def[6]",
+  "def[7]",
+  "def[8]",
+  "def[9]",
+  "def[10]",
+  "def[11]",
+  "def[12]",
+  "def[13]",
+  "def[14]",
+  "def[15]",
+  "def[16]",
+  "def[17]",
+  "def[18]",
+  "def[19]",
+  "def[20]"
+)
+ 
+fit_summary_att <- summary(fit_sim_modelo4, pars = eff_aleatorios_att)$summary
+fit_summary_att <- fit_summary_att[, c("50%", "2.5%", "97.5%")]
+
+fit_summary_def <- summary(fit_sim_modelo4, pars = eff_aleatorios_def)$summary
+fit_summary_def <- fit_summary_def[, c("50%", "2.5%", "97.5%")]
+
+fit_summary_att <- cbind(times, fit_summary_att) |>
+  rename(
+    Time = home_team_name,
+    Mediana = "50%",
+  ) |>
+  select(
+    Time,
+    Mediana,
+    "2.5%",
+    "97.5%"
+  )
+
+fit_summary_def <- cbind(times, fit_summary_def) |>
+  rename(
+    Time = home_team_name,
+    Mediana = "50%",
+  ) |>
+  select(
+    Time,
+    Mediana,
+    "2.5%",
+    "97.5%"
+  )
+```
+

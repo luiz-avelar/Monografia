@@ -1,0 +1,258 @@
+---
+title: "Comparacao modelo 1"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(flextable)
+library(rstan)
+library(rjags)
+library(MCMCvis)
+```
+
+Importação dos dados 
+```{r}
+dados <- read.csv("../../data/dataset_2022.csv", header = TRUE, encoding = 'UTF-8')
+```
+
+Importação dos modelos
+```{r}
+modelo1_stan <- stan_model(file = "../../models/stan_compare/poisson-misto-com-mistura.stan")
+```
+
+Parametros do modelo
+```{r}
+iter <- 5000
+G <- 380
+T <- 20
+
+dados_list <- list(
+  G  = G,
+  T  = T,
+  h  = dados$home_team_id,
+  a  = dados$away_team_id,
+  y1 = dados$home_team_score,
+  y2 = dados$away_team_score
+)
+fit_sim_modelo_stan <- sampling(modelo1_stan, data = dados_list, chains = 4, iter = iter, cores = 1)
+```
+
+```{r}
+cat("
+model
+{   
+C <- 10000
+
+  for(g in 1:G) {  
+    ## Criar vetor de zeros fora (passado como argumento)
+    
+    # Mandante
+    ## zeros1[g] <- 0 
+    zeros1[g] ~ dpois(fg1[g])
+    fg1[g] <- -log(L1[g]) + C
+    lambda1[g] = exp(home + att[h[g]] + def[a[g]]) # h e a são passados nos dados
+    L1[g] <- p_home * equals(y1[g], 0) + (1 - p_home) * (exp(-lambda1[g]) * lambda1[g] ^ y1[g]) / y1_factorial[g]
+    
+    # Visitante
+    ## zeros2[g] <- 0 
+    zeros2[g] ~ dpois(fg2[g])
+    fg2[g] <- -log(L2[g]) + C
+    lambda2[g] = exp(att[a[g]] + def[h[g]])
+    L2[g] <- p_away * equals(y2[g], 0) + (1 - p_away) * (exp(-lambda2[g]) * lambda2[g] ^ y2[g]) / y2_factorial[g]
+    
+    # Mandante predicao
+    y1_indicator[g] ~ dbin(p_home, 1)
+    y1_aux[g] ~ dpois(lambda1[g])
+    y1_tilde[g] = y1_aux[g] * (1 - y1_indicator[g])
+
+    # Visitante predicao
+    y2_indicator[g] ~ dbin(p_away, 1)
+    y2_aux[g] ~ dpois(lambda2[g])
+    y2_tilde[g] = y2_aux[g] * (1 - y2_indicator[g])
+  }
+  
+  for(t in 1:(T-1)) {
+    att_raw[t] ~ dnorm(mu_att, tau_att)  ## tau = 1/sigma2
+    def_raw[t] ~ dnorm(mu_def, tau_def)
+    att[t] = att_raw[t]
+    def[t] = def_raw[t]
+  }
+  
+  att[T] = 0
+  def[T] = 0
+  
+  tau_eff = 1/sigma_sq_eff ## sigma_sq_eff passado nos dados
+  tau_size = 1/sigma_sq_eff_size ## sigma_sq_eff_size passado nos dados
+   
+  mu_att ~ dnorm(0, tau_eff)
+  mu_def ~ dnorm(0, tau_eff)
+  
+  home ~ dnorm(0, tau_eff)
+  
+  tau_att ~ dgamma(a_att, b_att) ## a_att e b_att vem nos dados
+  tau_def ~ dgamma(a_def, b_def)
+  
+  sigma_att = 1/sqrt(tau_att)
+  sigma_def = 1/sqrt(tau_def)
+  
+  p_home ~ dbeta(alpha, beta) 
+  p_away ~ dbeta(alpha, beta) 
+}
+", file={model <- tempfile()})
+```
+
+```{r}
+library(rjags)
+# https://math.ntnu.edu.tw/~rtsai/104/bayes/jags/jags-OLR.pdf
+
+load.module("bugs")
+#load.module("mix")
+
+G = 380
+T = 20
+sigma_sq_eff = 100
+
+#
+a_att <- 0.1
+b_att <- 0.1
+
+#
+a_def <- 0.1
+b_def <- 0.1
+
+#
+alpha <- 0.1
+beta <- 0.4
+zeros <- rep(0, G)
+
+# 
+sigma_sq_eff_size <- 2.5
+
+## Dados
+data <- read.csv("../../data/dataset_2022.csv", header = TRUE, encoding = 'UTF-8')
+
+n_sim <- 5000
+jags.m <- jags.model(model, quiet = TRUE,
+                     data = list(
+                       G = G,
+                       a_att= a_att,
+                       a_def = a_def,
+                       b_att = b_att,
+                       b_def = b_def,
+                       sigma_sq_eff = sigma_sq_eff,
+                       sigma_sq_eff_size = sigma_sq_eff_size,
+                       T = T,
+                       h  = data$home_team_id,
+                       a  = data$away_team_id,
+                       y1 = data$home_team_score,
+                       y2 = data$away_team_score,
+                       alpha = alpha,
+                       beta = beta,
+                       y1_factorial = factorial(data$home_team_score),
+                       y2_factorial = factorial(data$away_team_score),
+                       zeros1 = zeros,
+                       zeros2 = zeros
+                     ), 
+                    n.chains = 4, n.adapt = 1000)
+```
+
+```{r}
+model_cat_parameters <- coda.samples(jags.m, 
+                             c("home", "mu_att", "mu_def", "sigma_att", "sigma_def", "p_home",
+"p_away"),
+                             n.iter = n_sim, n.burnin = floor(n_sim/2), quiet = T)
+```
+
+
+```{r}
+params = c(
+  "home", 
+  "mu_att",
+  "mu_def",
+  "sigma_att",
+  "sigma_def",
+  "p_zero_home",
+  "p_zero_away"
+)
+
+parametros_stan <- MCMCsummary(
+   fit_sim_modelo_stan,
+   params = params,
+   probs = c(0.025, 0.5, 0.975),
+   Rhat = TRUE,
+   n.eff = TRUE
+) |>
+  select(
+    Rhat,
+    n.eff
+  ) 
+
+parametros_jags <- MCMCsummary(
+   model_cat_parameters,
+   params = params,
+   probs = c(0.025, 0.5, 0.975),
+   Rhat = TRUE,
+   n.eff = TRUE
+) |>
+  select(
+    Rhat,
+    n.eff
+  ) |>
+  rename(
+    "Rhat " = Rhat,
+    "n.eff " = n.eff
+  )
+
+
+Parametros <- c(
+        "home",
+        "mu_att",
+        "mu_def",
+        "sigma_att",
+        "sigma_def",
+        "p_home",
+        "p_away"
+    ) 
+
+parametros <- cbind(Parametros, parametros_stan, parametros_jags)
+
+parametros <- parametros %>%
+ replace(is.na(.), 0) |>
+  mutate(
+    Parametros = str_replace_all(Parametros, "p_home", "p_zeros_home"),
+    Parametros = str_replace_all(Parametros, "p_away", "p_zeros_away")
+
+  )
+```
+
+```{r}
+set_flextable_defaults(
+  font.size = 12, theme_fun = theme_vanilla,
+  padding = 6,
+  background.color = "#EFEFEF"
+)
+
+ft <- flextable(parametros)
+ft <- add_header_row(
+  ft,
+  colwidths = c(1, 2, 2),
+  values = c("", "Stan", "Jags")
+)
+# ft <- merge_at(ft, i = 1:6, j = 1)
+ft <- align(ft, i = 1, part = "header", align = "center")
+ft <- colformat_double(
+  x = ft,
+  big.mark = "", 
+  decimal.mark = ",",
+  digits = 2
+)
+ft <- colformat_int(
+  x = ft,
+  big.mark = ""
+)
+
+ft 
+
+```
+

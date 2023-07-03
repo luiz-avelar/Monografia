@@ -1,0 +1,97 @@
+---
+title: "Modelo poisson misto JAGs"
+output: html_notebook
+---
+# Código do modelo no Jags
+
+```{r echo=TRUE}
+cat("
+model
+{   
+  for(g in 1:G) {  
+    y1[g] ~  dpois(lambda1[g])
+    lambda1[g] = exp(home + att[h[g]] + def[a[g]]) # h e a são passados nos dados
+    
+    y2[g] ~  dpois(lambda2[g])
+    lambda2[g] = exp(att[a[g]] + def[h[g]])
+  }
+  
+  for(t in 1:(T-1)) {
+    att_raw[t] ~ dnorm(mu_att, tau_att)  ## tau = 1/sigma2
+    def_raw[t] ~ dnorm(mu_def, tau_def)
+    att[t] = att_raw[t]
+    def[t] = def_raw[t]
+  }
+  
+  att[T] = 0
+  def[T] = 0
+  
+  tau_eff = 1/100 ## sigma_sq_eff passado nos dados
+   
+  mu_att ~ dnorm(0, tau_eff)
+  mu_def ~ dnorm(0, tau_eff)
+  
+  home ~ dnorm(0, tau_eff)
+  
+  sigma_att ~ dt(0, 1/(2.5 ^ 2), 1)T(0,)
+  sigma_def ~ dt(0, 1/(2.5 ^ 2), 1)T(0,)
+
+  tau_att = 1 / (sigma_att ^ 2)
+  tau_def = 1 / (sigma_def ^ 2)
+  
+}
+", file={model <- tempfile()})
+```
+
+
+
+
+```{r}
+library(rjags)
+# https://math.ntnu.edu.tw/~rtsai/104/bayes/jags/jags-OLR.pdf
+
+load.module("bugs")
+#load.module("mix")
+
+G = 380
+T = 20
+
+## Dados
+data <- read.csv("../../data/2014_partidas_tidy.csv", header = TRUE, encoding = 'UTF-8')
+
+n_sim <- 5000
+jags.m <- jags.model(model, quiet = TRUE,
+                     data = list(
+                       G = G,
+                       T = T,
+                       h  = data$home_team_id,
+                       a  = data$away_team_id,
+                       y1 = data$home_team_score,
+                       y2 = data$away_team_score
+                       
+                     ), 
+                    n.chains = 1, n.adapt = 1000)
+
+model_cat_dp <- coda.samples(jags.m, 
+                             c("y1", "y2"),
+                             n.iter = n_sim, n.burnin = floor(n_sim/2), quiet = T)
+```
+
+```{r fig.height=10, fig.width=10}
+summary(model_cat_dp)
+plot(model_cat_dp)
+```
+
+```{r}
+model_cat_parameters <- coda.samples(jags.m, 
+                             c("home", "mu_att", "mu_def", "sigma_att", "sigma_def"),
+                             n.iter = n_sim, n.burnin = floor(n_sim/2), quiet = T)
+```
+```{r}
+plot(model_cat_parameters)
+```
+
+```{r}
+summary(model_cat_parameters)
+```
+

@@ -81,16 +81,16 @@ T = 20
 sigma_sq_eff = 100
 
 #
-a_att <- 1
-b_att <- 1
+a_att <- 0.1
+b_att <- 0.1
 
 #
-a_def <- 1
-b_def <- 1
+a_def <- 0.1
+b_def <- 0.1
 
 #
-alpha <- 2
-beta <- 5
+alpha <- 0.1
+beta <- 0.4
 zeros <- rep(0, G)
 
 # 
